@@ -1,0 +1,10 @@
+{
+    "autoload": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "require": {
+        "codeception/codeception": "^3.1"
+    }
+}

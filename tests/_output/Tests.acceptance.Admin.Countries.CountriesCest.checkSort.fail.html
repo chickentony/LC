@@ -1,0 +1,481 @@
+<html lang="en"><head>
+<title>
+  
+  
+ Edit Country | My Store</title>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow">
+<link href="/LiteCart/includes/templates/default.admin/styles/loader.css" rel="stylesheet" media="all">
+<link href="/LiteCart/includes/templates/default.admin/styles/theme.css" rel="stylesheet" media="all">
+<link rel="shortcut icon" href="/LiteCart/favicon.ico">
+
+<script src="//code.jquery.com/jquery-1.12.4.min.js"></script>
+<script src="//code.jquery.com/jquery-migrate-1.4.1.min.js"></script>
+<script>
+  window.jQuery || document.write(unescape('%3Cscript src="/LiteCart/ext/jquery/jquery-1.12.4.min.js"%3E%3C/script%3E'));
+  (window.jQuery && jQuery.migrateTrace) || document.write(unescape('%3Cscript src="/LiteCart/ext/jquery/jquery-migrate-1.4.1.min.js"%3E%3C/script%3E'));
+</script>
+<link rel="stylesheet" href="/LiteCart/ext/fontawesome/css/font-awesome.min.css" media="screen">
+
+<script>
+<!--/*--><![CDATA[/*><!--*/
+  $(document).ready(function() {
+    if ($("h1")) {
+      if (document.title.substring(0, $("h1:first").text().length) == $("h1:first").text()) return;
+      document.title = $("h1:first").text() +" | "+ document.title;
+    }
+  });
+/*]]>*/-->
+</script>
+
+<script>
+var $buoop = {c:2};
+function $buo_f(){
+  var e = document.createElement("script");
+  e.src = "//browser-update.org/update.js";
+  document.body.appendChild(e);
+};
+try {document.addEventListener("DOMContentLoaded", $buo_f,false)}
+catch(e){window.attachEvent("onload", $buo_f)}
+</script>
+</head>
+<body>
+
+<div id="body-wrapper">
+  <div id="body">
+    <div id="content-wrapper">
+    <table style="width: 100%;">
+      <tbody><tr>
+        <td id="sidebar" style="vertical-align: top; width: 230px;">
+          <div class="logotype">
+            <a href="http://localhost/LiteCart/admin/"><img src="/LiteCart/cache/0c5c18d55eac4eefb6786787993ee500dc5996ea220x70_fob.png" alt="My Store" title="My Store"></a>
+          </div>
+          <div class="header">
+            <a href="http://localhost/LiteCart/en/" title="Catalog"><i class="fa fa-chevron-circle-left"></i></a>
+            <a href="http://localhost/LiteCart/admin/" title="Home"><i class="fa fa-home fa-lg"></i></a>
+            <a href="?app=settings&amp;doc=advanced&amp;action=edit&amp;key=webmail_link" target="_blank" title="Webmail"><i class="fa fa-envelope"></i></a>            <a href="?app=settings&amp;doc=advanced&amp;action=edit&amp;key=database_admin_link" target="_blank" title="Database Manager"><i class="fa fa-database"></i></a>            <a href="http://localhost/LiteCart/admin/logout.php" title="Logout"><i class="fa fa-sign-out fa-lg"></i></a>
+          </div>
+
+          
+
+          <div id="box-apps-menu-wrapper">
+  <ul id="box-apps-menu" class="list-vertical">
+          <li id="app-">
+        <a href="http://localhost/LiteCart/admin/?app=appearance&amp;doc=template">
+        <span class="fa-stack fa-lg icon-wrapper">
+          <i class="fa fa-circle fa-stack-2x icon-background" style="color: #ff387c;"></i>          <i class="fa fa-adjust fa-stack-1x icon" style="color: #fff;"></i>        </span>
+        <span class="name">Appearence</span>
+      </a>
+
+      
+    </li>
+        <li id="app-">
+        <a href="http://localhost/LiteCart/admin/?app=catalog&amp;doc=catalog">
+        <span class="fa-stack fa-lg icon-wrapper">
+          <i class="fa fa-circle fa-stack-2x icon-background" style="color: #d0cc4f;"></i>          <i class="fa fa-th fa-stack-1x icon" style="color: #fff;"></i>        </span>
+        <span class="name">Catalog</span>
+      </a>
+
+      
+    </li>
+        <li id="app-" class="selected">
+        <a href="http://localhost/LiteCart/admin/?app=countries&amp;doc=countries">
+        <span class="fa-stack fa-lg icon-wrapper">
+          <i class="fa fa-circle fa-stack-2x icon-background" style="color: #69c5e7;"></i>          <i class="fa fa-flag fa-stack-1x icon" style="color: #fff;"></i>        </span>
+        <span class="name">Countries</span>
+      </a>
+
+      
+    </li>
+        <li id="app-">
+        <a href="http://localhost/LiteCart/admin/?app=currencies&amp;doc=currencies">
+        <span class="fa-stack fa-lg icon-wrapper">
+          <i class="fa fa-circle fa-stack-2x icon-background" style="color: #f3be30;"></i>          <i class="fa fa-money fa-stack-1x icon" style="color: #fff;"></i>        </span>
+        <span class="name">Currencies</span>
+      </a>
+
+      
+    </li>
+        <li id="app-">
+        <a href="http://localhost/LiteCart/admin/?app=customers&amp;doc=customers">
+        <span class="fa-stack fa-lg icon-wrapper">
+          <i class="fa fa-circle fa-stack-2x icon-background" style="color: #5ab687;"></i>          <i class="fa fa-user fa-stack-1x icon" style="color: #fff;"></i>        </span>
+        <span class="name">Customers</span>
+      </a>
+
+      
+    </li>
+        <li id="app-">
+        <a href="http://localhost/LiteCart/admin/?app=geo_zones&amp;doc=geo_zones">
+        <span class="fa-stack fa-lg icon-wrapper">
+          <i class="fa fa-circle fa-stack-2x icon-background" style="color: #6aabe8;"></i>          <i class="fa fa-globe fa-stack-1x icon" style="color: #fff;"></i>        </span>
+        <span class="name">Geo Zones</span>
+      </a>
+
+      
+    </li>
+        <li id="app-">
+        <a href="http://localhost/LiteCart/admin/?app=languages&amp;doc=languages">
+        <span class="fa-stack fa-lg icon-wrapper">
+          <i class="fa fa-circle fa-stack-2x icon-background" style="color: #4b79a5;"></i>          <i class="fa fa-comments fa-stack-1x icon" style="color: #fff;"></i>        </span>
+        <span class="name">Languages</span>
+      </a>
+
+      
+    </li>
+        <li id="app-">
+        <a href="http://localhost/LiteCart/admin/?app=modules&amp;doc=jobs">
+        <span class="fa-stack fa-lg icon-wrapper">
+          <i class="fa fa-circle fa-stack-2x icon-background" style="color: #c78dc8;"></i>          <i class="fa fa-cube fa-stack-1x icon" style="color: #fff;"></i>        </span>
+        <span class="name">Modules</span>
+      </a>
+
+      
+    </li>
+        <li id="app-">
+        <a href="http://localhost/LiteCart/admin/?app=orders&amp;doc=orders">
+        <span class="fa-stack fa-lg icon-wrapper">
+          <i class="fa fa-circle fa-stack-2x icon-background" style="color: #b2db64;"></i>          <i class="fa fa-shopping-cart fa-stack-1x icon" style="color: #fff;"></i>        </span>
+        <span class="name">Orders</span>
+      </a>
+
+      
+    </li>
+        <li id="app-">
+        <a href="http://localhost/LiteCart/admin/?app=pages&amp;doc=pages">
+        <span class="fa-stack fa-lg icon-wrapper">
+          <i class="fa fa-circle fa-stack-2x icon-background" style="color: #bec6b4;"></i>          <i class="fa fa-file-text fa-stack-1x icon" style="color: #fff;"></i>        </span>
+        <span class="name">Pages</span>
+      </a>
+
+      
+    </li>
+        <li id="app-">
+        <a href="http://localhost/LiteCart/admin/?app=reports&amp;doc=monthly_sales">
+        <span class="fa-stack fa-lg icon-wrapper">
+          <i class="fa fa-circle fa-stack-2x icon-background" style="color: #b79d82;"></i>          <i class="fa fa-pie-chart fa-stack-1x icon" style="color: #fff;"></i>        </span>
+        <span class="name">Reports</span>
+      </a>
+
+      
+    </li>
+        <li id="app-">
+        <a href="http://localhost/LiteCart/admin/?app=settings&amp;doc=store_info">
+        <span class="fa-stack fa-lg icon-wrapper">
+          <i class="fa fa-circle fa-stack-2x icon-background" style="color: #a3a3a3;"></i>          <i class="fa fa-cogs fa-stack-1x icon" style="color: #fff;"></i>        </span>
+        <span class="name">Settings</span>
+      </a>
+
+      
+    </li>
+        <li id="app-">
+        <a href="http://localhost/LiteCart/admin/?app=slides&amp;doc=slides">
+        <span class="fa-stack fa-lg icon-wrapper">
+          <i class="fa fa-circle fa-stack-2x icon-background" style="color: #b89dd9;"></i>          <i class="fa fa-picture-o fa-stack-1x icon" style="color: #fff;"></i>        </span>
+        <span class="name">Slides</span>
+      </a>
+
+      
+    </li>
+        <li id="app-">
+        <a href="http://localhost/LiteCart/admin/?app=tax&amp;doc=tax_classes">
+        <span class="fa-stack fa-lg icon-wrapper">
+          <i class="fa fa-circle fa-stack-2x icon-background" style="color: #ccd2af;"></i>          <i class="fa fa-university fa-stack-1x icon" style="color: #fff;"></i>        </span>
+        <span class="name">Tax</span>
+      </a>
+
+      
+    </li>
+        <li id="app-">
+        <a href="http://localhost/LiteCart/admin/?app=translations&amp;doc=search">
+        <span class="fa-stack fa-lg icon-wrapper">
+          <i class="fa fa-circle fa-stack-2x icon-background" style="color: #cd9e9e;"></i>          <i class="fa fa-book fa-stack-1x icon" style="color: #fff;"></i>        </span>
+        <span class="name">Translations</span>
+      </a>
+
+      
+    </li>
+        <li id="app-">
+        <a href="http://localhost/LiteCart/admin/?app=users&amp;doc=users">
+        <span class="fa-stack fa-lg icon-wrapper">
+          <i class="fa fa-circle fa-stack-2x icon-background" style="color: #f8af5a;"></i>          <i class="fa fa-star fa-stack-1x icon" style="color: #fff;"></i>        </span>
+        <span class="name">Users</span>
+      </a>
+
+      
+    </li>
+        <li id="app-">
+        <a href="http://localhost/LiteCart/admin/?app=vqmods&amp;doc=vqmods">
+        <span class="fa-stack fa-lg icon-wrapper">
+          <i class="fa fa-circle fa-stack-2x icon-background" style="color: #a6dad7;"></i>          <i class="fa fa-plug fa-stack-1x icon" style="color: #fff;"></i>        </span>
+        <span class="name">vQmods</span>
+      </a>
+
+      
+    </li>
+    </ul>
+</div>
+
+          <div class="footer">
+            <div class="languages" style="text-align: center; margin-bottom: 10px 0 20px 0;">
+<a href="http://localhost/LiteCart/admin/?app=countries&amp;doc=edit_country&amp;country_code=CA&amp;language=en"><img src="/LiteCart/images/icons/languages/en.png" alt="English" style="max-width: 16px;"></a>             </div>
+
+            <div id="platform">LiteCart® 1.3.6</div>
+
+            <div id="copyright">© 2012-2019 LiteCart<br>
+              <a href="http://www.litecart.net" target="_blank">www.litecart.net</a>
+            </div>
+          </div>
+        </td>
+        <td id="column_left" style="vertical-align: top;">
+          
+        </td>
+        <td id="content" style="vertical-align: top;">
+          
+          <b>Warning:</b> "continue 2" targeting switch is equivalent to "break 2". Did you mean to use "continue 3"? in <b>~/vqmod/vqmod.php</b> on line <b>507</b><br>
+<style>
+#content {
+  background: #fff; /* Old browsers */
+  background: -moz-linear-gradient(-45deg, rgba(105, 197, 231, 1) 0px, rgba(255,255,255,1) 100px); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, right bottom, color-stop(0px, rgba(105, 197, 231, 1)), color-stop(100px,rgba(255,255,255,1))); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(-45deg, rgba(105, 197, 231, 1) 0px, rgba(255,255,255,1) 100px); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(-45deg, rgba(105, 197, 231, 1) 0px, rgba(255,255,255,1) 100px); /* Opera 11.10+ */
+  background: -ms-linear-gradient(-45deg, rgba(105, 197, 231, 1) 0px, rgba(255,255,255,1) 100px); /* IE10+ */
+  background: linear-gradient(135deg, rgba(105, 197, 231, 1) 0px, rgba(255,255,255,1) 100px); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#69c5e7', endColorstr='#ffffff', GradientType=1); /* IE6-9 fallback on horizontal gradient */
+}
+</style>
+
+<span style="float: right; margin-left: 10px;"><a href="http://wiki.litecart.net/?id=Admin%3Acountries%2Fedit_country" target="_blank" title="Help"><i class="fa fa-question-circle" style="font-size: 2em; color: #0099cc;"></i></a></span>
+
+<h1 style="margin-top: 0px;"><span class="fa-stack icon-wrapper">
+  <i class="fa fa-circle fa-stack-2x icon-background" style="color: #69c5e7;"></i>
+  <i class="fa fa-flag fa-stack-1x icon" style="color: #fff;"></i>
+</span> Edit Country</h1>
+
+<form method="post" enctype="multipart/form-data" accept-charset="UTF-8">
+<input type="hidden" name="token" value="68e520560ee936758acebf73b221449ef62d513f">
+
+  <table>
+    <tbody><tr>
+      <td><strong>Status</strong><br>
+        <label><input type="radio" name="status" value="1" data-type="toggle" checked="checked"> Enabled</label> <label><input type="radio" name="status" value="0" data-type="toggle"> Disabled</label>      </td>
+    </tr>
+    <tr>
+        <td><strong>Code</strong> (ISO 3166-1 alpha-2)<br>
+          <input type="text" name="iso_code_2" value="CA" data-type="text" data-size="tiny" required="required" pattern="[A-Z]{2}"> <a href="http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2" target="_blank"><i class="fa fa-external-link"></i></a>
+      </td>
+    </tr>
+    <tr>
+        <td><strong>Code</strong> (ISO 3166-1 alpha-3) <a href="http://en.wikipedia.org/wiki/ISO_3166-1_alpha-3" target="_blank"><i class="fa fa-external-link"></i></a><br>
+          <input type="text" name="iso_code_3" value="CAN" data-type="text" data-size="tiny" required="required" pattern="[A-Z]{3}">      </td>
+    </tr>
+    <tr>
+      <td><strong>Name</strong><br>
+        <input type="text" name="name" value="Canada" data-type="text" data-size="medium">      </td>
+    </tr>
+    <tr>
+      <td><strong>Domestic Name</strong><br>
+        <input type="text" name="domestic_name" value="" data-type="text" data-size="medium">      </td>
+    </tr>
+    <tr>
+      <td><strong>Tax ID Format</strong> <a href="https://en.wikipedia.org/wiki/Regular_expression" target="_blank"><i class="fa fa-external-link"></i></a><br>
+        <input type="text" name="tax_id_format" value="" data-type="text" data-size="medium"></td>
+    </tr>
+    <tr>
+      <td><strong>Address Format</strong> (<a id="address-format-hint" href="#">?</a>) <a href="http://www.addressdoctor.com/en/countries-data/address-formats.html" target="_blank"><i class="fa fa-external-link"></i></a><br>
+        <textarea name="address_format" data-size="medium" style="height: 150px;">%company
+%firstname %lastname
+%address1
+%address2
+%postcode %city
+%zone_name
+%country_name</textarea>        <script>
+          $("#address-format-hint").click(function() {
+            alert(
+              "Syntax:\n\n" +
+              "%company, %firstname, %lastname, \n" +
+              "%address1, %address2\n" +
+              "%postcode %city\n" +
+              "%zone_code, %zone_name\n" +
+              "%country_code_2, %country_code_3, %country_name\n"
+            );
+          });
+        </script>
+      </td>
+    </tr>
+    <tr>
+      <td><strong>Postcode Format</strong> <a href="https://en.wikipedia.org/wiki/Regular_expression" target="_blank"><i class="fa fa-external-link"></i></a><br>
+        <input type="text" name="postcode_format" value="[ABCEGHJKLMNPRSTVXY]\d[ABCEGHJ-NPRSTV-Z][ ]?\d[ABCEGHJ-NPRSTV-Z]\d" data-type="text" data-size="medium">      </td>
+    </tr>
+    <tr>
+      <td><strong>Currency Code</strong> <a href="https://en.wikipedia.org/wiki/List_of_countries_and_capitals_with_currency_and_language" target="_blank"><i class="fa fa-external-link"></i></a><br>
+        <input type="text" name="currency_code" value="CAD" data-type="text" data-size="tiny">      </td>
+    </tr>
+    <tr>
+      <td><strong>Phone Country Code</strong> <a href="https://en.wikipedia.org/wiki/List_of_country_calling_codes" target="_blank"><i class="fa fa-external-link"></i></a><br>
+        <input type="text" name="phone_code" value="1" data-type="text" data-size="tiny">      </td>
+    </tr>
+  </tbody></table>
+
+  <h2>Zones</h2>
+  <table width="100%" class="dataTable" id="table-zones">
+    <tbody><tr class="header">
+      <th style="vertical-align: text-top;">ID</th>
+      <th style="vertical-align: text-top;">Code</th>
+      <th style="vertical-align: text-top; width: 100%;">Name</th>
+      <th style="text-align: center; vertical-align: text-top;">&nbsp;</th>
+    </tr>
+      <tr>
+      <td><input type="hidden" name="zones[1][id]" value="1">1</td>
+      <td><input type="hidden" name="zones[1][code]" value="AB">AB</td>
+      <td><input type="hidden" name="zones[1][name]" value="Alberta">Alberta</td>
+      <td style="text-align: right;"><a id="remove-zone" href="#" title="Remove"><i class="fa fa-times-circle fa-lg" style="color: #cc3333;"></i></a></td>
+    </tr>
+      <tr>
+      <td><input type="hidden" name="zones[2][id]" value="2">2</td>
+      <td><input type="hidden" name="zones[2][code]" value="BC">BC</td>
+      <td><input type="hidden" name="zones[2][name]" value="British Columbia">British Columbia</td>
+      <td style="text-align: right;"><a id="remove-zone" href="#" title="Remove"><i class="fa fa-times-circle fa-lg" style="color: #cc3333;"></i></a></td>
+    </tr>
+      <tr>
+      <td><input type="hidden" name="zones[3][id]" value="3">3</td>
+      <td><input type="hidden" name="zones[3][code]" value="MB">MB</td>
+      <td><input type="hidden" name="zones[3][name]" value="Manitoba">Manitoba</td>
+      <td style="text-align: right;"><a id="remove-zone" href="#" title="Remove"><i class="fa fa-times-circle fa-lg" style="color: #cc3333;"></i></a></td>
+    </tr>
+      <tr>
+      <td><input type="hidden" name="zones[4][id]" value="4">4</td>
+      <td><input type="hidden" name="zones[4][code]" value="NB">NB</td>
+      <td><input type="hidden" name="zones[4][name]" value="New Brunswick">New Brunswick</td>
+      <td style="text-align: right;"><a id="remove-zone" href="#" title="Remove"><i class="fa fa-times-circle fa-lg" style="color: #cc3333;"></i></a></td>
+    </tr>
+      <tr>
+      <td><input type="hidden" name="zones[5][id]" value="5">5</td>
+      <td><input type="hidden" name="zones[5][code]" value="NL">NL</td>
+      <td><input type="hidden" name="zones[5][name]" value="Newfoundland and Labrador">Newfoundland and Labrador</td>
+      <td style="text-align: right;"><a id="remove-zone" href="#" title="Remove"><i class="fa fa-times-circle fa-lg" style="color: #cc3333;"></i></a></td>
+    </tr>
+      <tr>
+      <td><input type="hidden" name="zones[6][id]" value="6">6</td>
+      <td><input type="hidden" name="zones[6][code]" value="NT">NT</td>
+      <td><input type="hidden" name="zones[6][name]" value="Northwest Territories">Northwest Territories</td>
+      <td style="text-align: right;"><a id="remove-zone" href="#" title="Remove"><i class="fa fa-times-circle fa-lg" style="color: #cc3333;"></i></a></td>
+    </tr>
+      <tr>
+      <td><input type="hidden" name="zones[7][id]" value="7">7</td>
+      <td><input type="hidden" name="zones[7][code]" value="NS">NS</td>
+      <td><input type="hidden" name="zones[7][name]" value="Nova Scotia">Nova Scotia</td>
+      <td style="text-align: right;"><a id="remove-zone" href="#" title="Remove"><i class="fa fa-times-circle fa-lg" style="color: #cc3333;"></i></a></td>
+    </tr>
+      <tr>
+      <td><input type="hidden" name="zones[8][id]" value="8">8</td>
+      <td><input type="hidden" name="zones[8][code]" value="NU">NU</td>
+      <td><input type="hidden" name="zones[8][name]" value="Nunavut">Nunavut</td>
+      <td style="text-align: right;"><a id="remove-zone" href="#" title="Remove"><i class="fa fa-times-circle fa-lg" style="color: #cc3333;"></i></a></td>
+    </tr>
+      <tr>
+      <td><input type="hidden" name="zones[9][id]" value="9">9</td>
+      <td><input type="hidden" name="zones[9][code]" value="ON">ON</td>
+      <td><input type="hidden" name="zones[9][name]" value="Ontario">Ontario</td>
+      <td style="text-align: right;"><a id="remove-zone" href="#" title="Remove"><i class="fa fa-times-circle fa-lg" style="color: #cc3333;"></i></a></td>
+    </tr>
+      <tr>
+      <td><input type="hidden" name="zones[10][id]" value="10">10</td>
+      <td><input type="hidden" name="zones[10][code]" value="PE">PE</td>
+      <td><input type="hidden" name="zones[10][name]" value="Prince Edward Island">Prince Edward Island</td>
+      <td style="text-align: right;"><a id="remove-zone" href="#" title="Remove"><i class="fa fa-times-circle fa-lg" style="color: #cc3333;"></i></a></td>
+    </tr>
+      <tr>
+      <td><input type="hidden" name="zones[11][id]" value="11">11</td>
+      <td><input type="hidden" name="zones[11][code]" value="QC">QC</td>
+      <td><input type="hidden" name="zones[11][name]" value="Québec">Québec</td>
+      <td style="text-align: right;"><a id="remove-zone" href="#" title="Remove"><i class="fa fa-times-circle fa-lg" style="color: #cc3333;"></i></a></td>
+    </tr>
+      <tr>
+      <td><input type="hidden" name="zones[12][id]" value="12">12</td>
+      <td><input type="hidden" name="zones[12][code]" value="SK">SK</td>
+      <td><input type="hidden" name="zones[12][name]" value="Saskatchewan">Saskatchewan</td>
+      <td style="text-align: right;"><a id="remove-zone" href="#" title="Remove"><i class="fa fa-times-circle fa-lg" style="color: #cc3333;"></i></a></td>
+    </tr>
+      <tr>
+      <td><input type="hidden" name="zones[13][id]" value="13">13</td>
+      <td><input type="hidden" name="zones[13][code]" value="YT">YT</td>
+      <td><input type="hidden" name="zones[13][name]" value="Yukon Territory">Yukon Territory</td>
+      <td style="text-align: right;"><a id="remove-zone" href="#" title="Remove"><i class="fa fa-times-circle fa-lg" style="color: #cc3333;"></i></a></td>
+    </tr>
+      <tr>
+      <td>&nbsp;</td>
+      <td><input type="text" name="zone[code]" value="" data-type="text" data-size="small"></td>
+      <td><input type="text" name="zone[name]" value="" data-type="text" data-size="medium"></td>
+      <td style="text-align: right;"><button type="button" name="add_zone" value="Add">Add</button></td>
+    </tr>
+  </tbody></table>
+
+  <script>
+    $("body").on("click", "#remove-zone", function(event) {
+      event.preventDefault();
+      $(this).closest('tr').remove();
+    });
+
+    $("select[name='country[code]']").change(function(){
+      $('body').css('cursor', 'wait');
+      $.ajax({
+        url: 'http://localhost/LiteCart/en/ajax/zones.json?country_code=' + $(this).val(),
+        type: 'get',
+        cache: true,
+        async: true,
+        dataType: 'json',
+        error: function(jqXHR, textStatus, errorThrown) {
+          alert(jqXHR.readyState + '\n' + textStatus + '\n' + errorThrown.message);
+        },
+        success: function(data) {
+          $('select[name=\'zone[code]\']').html('');
+          if ($('select[name=\'zone[code]\']').attr('disabled')) $('select[name=\'zone[code]\']').removeAttr('disabled');
+          if (data) {
+            $('select[name=\'zone[code]\']').append('<option value="">-- All Zones --</option>');
+            $.each(data, function(i, zone) {
+              $('select[name=\'zone[code]\']').append('<option value="'+ zone.code +'">'+ zone.name +'</option>');
+            });
+          } else {
+            $('select[name=\'zone[code]\']').attr('disabled', 'disabled');
+          }
+        },
+        complete: function() {
+          $('body').css('cursor', 'auto');
+        }
+      });
+    });
+
+    var new_zone_i = 13;
+    $("button[name=add_zone]").click(function(event) {
+      event.preventDefault();
+      if ($("select[name='country[code]']").find("option:selected").val() == "") return;
+      new_zone_i++;
+      var output = '    <tr>'
+                 + '      <td><input type=\"hidden\" name=\"zones[new_zone_i][id]\" value=\"\" /></td>'
+                 + '      <td><input type=\"hidden\" name=\"zones[new_zone_i][code]\" value=\"new_zone_code\" />new_zone_code</td>'
+                 + '      <td><input type=\"hidden\" name=\"zones[new_zone_i][name]\" value=\"new_zone_name\" />new_zone_name</td>'
+                 + '      <td style="text-align: right;"><a id="remove-zone" href="#" title="Remove"><i class=\"fa fa-times-circle fa-lg\" style=\"color: #cc3333;\"></i></a></td>'
+                 + '    </tr>';
+      output = output.replace(/new_zone_i/g, 'new_' + new_zone_i);
+      output = output.replace(/new_zone_code/g, $("input[name='zone[code]']").val());
+      output = output.replace(/new_zone_name/g, $("input[name='zone[name]']").val());
+      $("#table-zones tr:last").before(output);
+    });
+  </script>
+
+  <p><span class="button-set"><button type="submit" name="save" value="Save"><i class="fa fa-floppy-o"></i> Save</button> <button type="button" name="cancel" value="Cancel" onclick="history.go(-1);"><i class="fa fa-times"></i> Cancel</button> <button type="submit" name="delete" value="Delete" onclick="if (!confirm('Are you sure?')) return false;"><i class="fa fa-trash-o"></i> Delete</button></span></p>
+
+</form>
+
+        </td>
+      </tr>
+    </tbody></table>
+    </div>
+  </div>
+</div>
+
+
+
+<script src="//browser-update.org/update.js"></script></body></html>
