@@ -3,15 +3,25 @@
 namespace Tests\Page\Admin\Countries;
 
 use AcceptanceTester;
+use Tests\acceptance\Admin\Countries\CountryPage;
 
-class CountriesPage extends AcceptanceTester
+class CountriesPage
 {
-
     /**
      * @var $geoZonesTitles
      * Массив заголовков гео-зон
      */
     public $geoZonesTitles;
+
+    public $countryPage;
+
+    protected $tester;
+
+    public function __construct(AcceptanceTester $tester, CountryPage $countryPage)
+    {
+        $this->tester = $tester;
+        $this->countryPage = new CountryPage();
+    }
 
     const COUNTRY_NAME_FROM_LIST = '//table[@class="dataTable"]//td//a[(text())]';
 
@@ -28,7 +38,7 @@ class CountriesPage extends AcceptanceTester
      */
     public function getCountriesWithGeoZones($element)
     {
-        $countriesList = $this->grabMultiple($element);
+        $countriesList = $this->tester->grabMultiple($element);
         $result = [];
         foreach ($countriesList as $key => $value) {
             $countriesAsString = explode(' ', $value);
@@ -55,20 +65,24 @@ class CountriesPage extends AcceptanceTester
         return $result;
     }
 
-    public function openCountriesWithGeoZones($countryWithGeoZonesXPath)
+    /**
+     * @param $countryWithGeoZonesXPath
+     * @throws \Codeception\Exception\ModuleException
+     */
+    public function checkCountriesGeoZonesSort($countryWithGeoZonesXPath)
     {
         foreach ($countryWithGeoZonesXPath as $value) {
             //ToDo: refactor this
             $str = '"' . $value . '"';
             //Кликаем на страну у которой есть хотя бы одна гео-зона
-            $this->click('//table[@class="dataTable"]//a[contains(.,' . $str . ')]');
+            $this->tester->click('//table[@class="dataTable"]//a[contains(.,' . $str . ')]');
             //Вытаскиваем всю информацию из строк с зонами
-            $geoZonesList = $this->grabMultiple('//table[@class="dataTable"]//td[(text())]');
+            $geoZonesList = $this->tester->grabMultiple('//table[@class="dataTable"]//td[(text())]');
             //Убираем лишнее элементы из массива с гео-зонами
             $this->prepareCountriesGeoZonesArray($geoZonesList);
             //Проверям сортировку
-            $this->checkCountriesGeoZonesSort($this->geoZonesTitles);
-            $this->click('//*[@name="cancel"]');
+            $this->tester->checkSort($this->geoZonesTitles);
+            $this->tester->click($this->countryPage::CANCEL_BUTTON);
         }
     }
 
@@ -84,14 +98,6 @@ class CountriesPage extends AcceptanceTester
             }
         }
         $this->geoZonesTitles = $geoZones;
-    }
-
-    public function checkCountriesGeoZonesSort($geoZones)
-    {
-        $geoZones = $this->geoZonesTitles;
-        $sortedGeoZones = $geoZones;
-        asort($sortedGeoZones);
-        $this->assertTrue($geoZones === $sortedGeoZones);
     }
 
 }
