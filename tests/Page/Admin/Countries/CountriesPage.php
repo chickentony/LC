@@ -9,27 +9,40 @@ class CountriesPage
 {
     /**
      * @var $geoZonesTitles
-     * Массив заголовков гео-зон
+     * Массив заголовков геозон
      */
     public $geoZonesTitles;
 
+    /** @var CountryPage
+     * Страница одной страны
+     */
     public $countryPage;
 
+    /** @var AcceptanceTester */
     protected $tester;
 
+    /**
+     * CountriesPage constructor.
+     * @param AcceptanceTester $tester
+     * @param CountryPage $countryPage
+     */
     public function __construct(AcceptanceTester $tester, CountryPage $countryPage)
     {
         $this->tester = $tester;
         $this->countryPage = new CountryPage();
     }
 
-    const COUNTRY_NAME_FROM_LIST = '//table[@class="dataTable"]//td//a[(text())]';
+    /** @var string Название страны из списка всех стран */
+    public const COUNTRY_NAME_FROM_LIST = '//table[@class="dataTable"]//td//a[(text())]';
 
-    const COUNTRY_TABLE_ROW = '//table[@class="dataTable"]//tr[@class="row"]';
+    /** @var string Строка с данными по стране */
+    public const COUNTRY_TABLE_ROW = '//table[@class="dataTable"]//tr[@class="row"]';
 
-    const PAGE_URL = 'admin/?app=countries';
+    /** @var string URL страницы */
+    public const PAGE_URL = 'admin/?app=countries';
 
-    const PAGE_HEADER = '//h1[contains(., "Countries")]';
+    /** @var string Заголовок страницы со странами */
+    public const PAGE_HEADER = '//h1[contains(., "Countries")]';
 
     /**
      * @param $element
@@ -54,7 +67,7 @@ class CountriesPage
      * @return array
      * Метод собирает массив из щаголовков стран, для последующего использования их в x-path
      */
-    public function countryNameForXpath($countriesList)
+    public function countryNameForXpath(array $countriesList)
     {
         $result = [];
         foreach ($countriesList as $value) {
@@ -69,7 +82,7 @@ class CountriesPage
      * @param $countryWithGeoZonesXPath
      * @throws \Codeception\Exception\ModuleException
      */
-    public function checkCountriesGeoZonesSort($countryWithGeoZonesXPath)
+    public function checkCountriesGeoZonesSort(array $countryWithGeoZonesXPath)
     {
         foreach ($countryWithGeoZonesXPath as $value) {
             //ToDo: refactor this
@@ -77,7 +90,7 @@ class CountriesPage
             //Кликаем на страну у которой есть хотя бы одна гео-зона
             $this->tester->click('//table[@class="dataTable"]//a[contains(.,' . $str . ')]');
             //Вытаскиваем всю информацию из строк с зонами
-            $geoZonesList = $this->tester->grabMultiple('//table[@class="dataTable"]//td[(text())]');
+            $geoZonesList = $this->tester->grabMultiple($this->countryPage::GEO_ZONES_TABLE_ROW);
             //Убираем лишнее элементы из массива с гео-зонами
             $this->prepareCountriesGeoZonesArray($geoZonesList);
             //Проверям сортировку
@@ -90,7 +103,7 @@ class CountriesPage
      * @param $geoZones
      * Убирает из массива с гео-зонами лишнюю информацию (коды зон и их абривиатуры)
      */
-    private function prepareCountriesGeoZonesArray($geoZones)
+    private function prepareCountriesGeoZonesArray(array $geoZones)
     {
         foreach ($geoZones as $key => $value) {
             if (strlen($value) < 4) {
