@@ -41,8 +41,6 @@ class Acceptance extends \Codeception\Module
      */
     public function checkSort($valuesList)
     {
-        /** @var \Codeception\Module\WebDriver $webDriver */
-        $webDriver = $this->getModule('WebDriver');
         $sortedValuesList = $valuesList;
         asort($sortedValuesList);
         \PHPUnit_Framework_Assert::assertTrue($valuesList === $sortedValuesList);

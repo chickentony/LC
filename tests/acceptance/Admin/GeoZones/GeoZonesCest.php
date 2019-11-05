@@ -27,5 +27,6 @@ class GeoZonesCest
         $I->amOnPage($geoZonesPage::PAGE_URL);
         $I->waitTillPageLoad($geoZonesPage::PAGE_HEADER);
         $geoZonesPage->openCountryPage();
+        $geoZonesPage->grabZones();
     }
 }

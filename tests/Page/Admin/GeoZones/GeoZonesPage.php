@@ -25,13 +25,27 @@ class GeoZonesPage
 
     public function openCountryPage()
     {
-        $i = 0;
-        while ($i <= 3) {
-            $i++;
-            $this->tester->click(self::EDIT_BUTTON);
-            $this->tester->click(self::CANCEL_BUTTON);
-        }
+        $this->tester->click(self::EDIT_BUTTON);
+//        $editButtonsHrefs = $this->tester->grabMultiple(self::EDIT_BUTTON, 'href');
+//        $i = 0;
+//        while ($i <= count($editButtonsHrefs)) {
+//            $i++;
+//            $this->tester->click(self::EDIT_BUTTON);
+//            $this->tester->click(self::CANCEL_BUTTON);
+//        }
     }
+
+    public function grabZones()
+    {
+        $data = $this->tester->grabMultiple('//table[@class="dataTable"]//select[@data-size="medium"]/option[@selected="selected"]');
+        foreach ($data as $key => $value){
+            if ($key % 2 === 0) {
+                unset($data[$key]);
+            }
+        }
+        var_dump($data);
+    }
+
 
 //    public function checkSort()
 //    {
