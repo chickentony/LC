@@ -16,6 +16,8 @@ class GeoZonesPage
 
     public const CANCEL_BUTTON = '//*[@name="cancel"]';
 
+    private $actualGeoZonesList;
+
     protected $tester;
 
     public function __construct(AcceptanceTester $tester)
@@ -23,40 +25,51 @@ class GeoZonesPage
         $this->tester = $tester;
     }
 
-    public function openCountryPage()
+    /**
+     * @throws \Codeception\Exception\ModuleException
+     */
+    public function openGeoZonePage()
     {
-        $this->tester->click(self::EDIT_BUTTON);
-//        $editButtonsHrefs = $this->tester->grabMultiple(self::EDIT_BUTTON, 'href');
-//        $i = 0;
-//        while ($i <= count($editButtonsHrefs)) {
-//            $i++;
-//            $this->tester->click(self::EDIT_BUTTON);
-//            $this->tester->click(self::CANCEL_BUTTON);
+//        $this->grabActualGeoZones();
+//        var_dump($this->actualGeoZonesList);
+//        foreach ($this->actualGeoZonesList as $value)
+//        {
+//            $this->tester->click($value);
+//            $this->grabZones();
+//            $this->checkGeoZonesSort();
+//            $this->tester->click(self::CANCEL_BUTTON, '');
 //        }
     }
 
+    /**
+     * @return string[]
+     */
     public function grabZones()
     {
-        $data = $this->tester->grabMultiple('//table[@class="dataTable"]//select[@data-size="medium"]/option[@selected="selected"]');
-        foreach ($data as $key => $value){
+        //Забираем все выбранные значения из выпадающих списков
+        $geoZonesTitles = $this->tester->grabMultiple('//table[@class="dataTable"]//select[@data-size="medium"]/option[@selected="selected"]');
+        // Убираем лишние поля из массива с заголовками
+        foreach ($geoZonesTitles as $key => $value){
             if ($key % 2 === 0) {
-                unset($data[$key]);
+                unset($geoZonesTitles[$key]);
             }
         }
-        var_dump($data);
+        return $geoZonesTitles;
     }
 
+    /**
+     * @throws \Codeception\Exception\ModuleException
+     */
+    public function checkGeoZonesSort()
+    {
+        $zones = $this->grabZones();
+        $this->tester->checkSort($zones);
+    }
 
-//    public function checkSort()
+//    public function grabActualGeoZones()
 //    {
-//        $data = $this->grabMultiple('//table[@class="dataTable"]//td//a[(text())]');
-//        $sortedData = array_values($data);
-//        asort($sortedData);
-//        if ($sortedData === $data) {
-//            return true;
-//        }
+//        $zones = $this->tester->grabMultiple(self::EDIT_BUTTON, 'href');
+//        $this->actualGeoZonesList = $zones;
 //    }
-
-
 
 }
