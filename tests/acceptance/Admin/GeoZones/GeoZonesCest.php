@@ -26,6 +26,6 @@ class GeoZonesCest
         $I->wantTo('Check that geo-zones sorted alphabetically inside country page');
         $I->amOnPage($geoZonesPage::PAGE_URL);
         $I->waitTillPageLoad($geoZonesPage::PAGE_HEADER);
-        $geoZonesPage->openGeoZonePage();
+        $geoZonesPage->openGeoZonePageAndCheckSort();
     }
 }
