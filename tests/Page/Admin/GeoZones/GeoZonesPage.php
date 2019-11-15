@@ -20,9 +20,6 @@ class GeoZonesPage
     /** @var string Кнопка отмены */
     public const CANCEL_BUTTON = '//*[@name="cancel"]';
 
-    /** Список геозон на странице*/
-    private $actualGeoZonesList;
-
     /**@var AcceptanceTester */
     protected $tester;
 
@@ -40,11 +37,9 @@ class GeoZonesPage
      */
     public function openGeoZonePageAndCheckSort()
     {
-        $this->grabActualGeoZones();
-        foreach ($this->actualGeoZonesList as $value) {
+        foreach ($this->grabActualGeoZones() as $value) {
             $this->tester->click($value);
             //ToDo: Сделать проверку на страницу без геозон
-            $this->grabZones();
             $this->checkGeoZonesSort();
             $this->tester->click(self::CANCEL_BUTTON);
         }
@@ -52,9 +47,9 @@ class GeoZonesPage
 
     /**
      * @return string[]
-     * Получает все выюранные элементы из выпадающих списков и оставляет только нужные нам
+     * Получает все выбранные элементы из выпадающих списков и оставляет только нужные нам
      */
-    public function grabZones()
+    private function grabZones()
     {
         //Забираем все выбранные значения из выпадающих списков
         $geoZonesTitles = $this->tester->grabMultiple(self::SELECTED_ITEM_IN_DROPDOWN);
@@ -71,17 +66,16 @@ class GeoZonesPage
      * @throws \Codeception\Exception\ModuleException
      * Проверяет сортировку геозон
      */
-    public function checkGeoZonesSort()
+    private function checkGeoZonesSort()
     {
         $zones = $this->grabZones();
         $this->tester->checkSort($zones);
     }
 
-    /** Задаем массив с геозонами */
-    public function grabActualGeoZones()
+    /** Возвращаем массив с геозонами */
+    private function grabActualGeoZones()
     {
-        $zones = $this->tester->grabMultiple(self::GEO_ZONE_NAME_FROM_TABLES);
-        $this->actualGeoZonesList = $zones;
+        return $this->tester->grabMultiple(self::GEO_ZONE_NAME_FROM_TABLES);
     }
 
 }
