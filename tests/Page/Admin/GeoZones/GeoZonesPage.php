@@ -54,6 +54,7 @@ class GeoZonesPage
         //Забираем все выбранные значения из выпадающих списков
         $geoZonesTitles = $this->tester->grabMultiple(self::SELECTED_ITEM_IN_DROPDOWN);
         // Убираем лишние поля из массива с заголовками
+        //ToDo: добавить нормальное название переменных для услвоия
         foreach ($geoZonesTitles as $key => $value) {
             if ($key % 2 === 0) {
                 unset($geoZonesTitles[$key]);

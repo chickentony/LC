@@ -34,7 +34,7 @@ class CountriesCest
      * @param CountriesPage $countriesPage
      * @throws \Codeception\Exception\ModuleException
      */
-    public function checkGeoZonesInsideCountries(AcceptanceTester $I, CountriesPage $countriesPage)
+    public function checkGeoZonesSortInsideCountries(AcceptanceTester $I, CountriesPage $countriesPage)
     {
         $I->amOnPage($countriesPage::PAGE_URL);
         $I->waitTillPageLoad($countriesPage::PAGE_HEADER);
