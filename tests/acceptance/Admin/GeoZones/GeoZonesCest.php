@@ -21,24 +21,11 @@ class GeoZonesCest
      * @param GeoZonesPage $geoZonesPage
      * @throws \Codeception\Exception\ModuleException
      */
-    public function checkGeoZonesSort(AcceptanceTester $I, GeoZonesPage $geoZonesPage)
+    public function checkGeoZonesSortIntoCountryPage(AcceptanceTester $I, GeoZonesPage $geoZonesPage)
     {
+        $I->wantTo('Check that geo-zones sorted alphabetically inside country page');
         $I->amOnPage($geoZonesPage::PAGE_URL);
         $I->waitTillPageLoad($geoZonesPage::PAGE_HEADER);
-        $I->checkSortOnPage($geoZonesPage::GEO_ZONE_NAME_FROM_TABLES);
-
-
-//        $pageData = $I->grabMultiple('//table[@class="dataTable"]//tr[@class="row"]');
-//
-//        foreach ($pageData as $key => $value) {
-//            $result = explode(' ', $value);
-//            if (end($result) !== '0') {
-//                var_dump(implode($result));
-////                 var_dump($result);
-////                 var_dump($key);
-//            }
-////            var_dump($result);
-//        }
-////        var_dump($pageData);
+        $geoZonesPage->openGeoZonePageAndCheckSort();
     }
 }

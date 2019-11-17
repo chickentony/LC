@@ -1,0 +1,6 @@
+tests/_output/*
+vendor/*
+cache/*
+data/errors.log
+vqmod/checked.cache
+!.gitignore

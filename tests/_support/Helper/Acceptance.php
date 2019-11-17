@@ -35,4 +35,15 @@ class Acceptance extends \Codeception\Module
         \PHPUnit_Framework_Assert::assertTrue($result === $sortedResult);
     }
 
+    /**
+     * @param $valuesList
+     * @throws \Codeception\Exception\ModuleException
+     */
+    public function checkSort($valuesList)
+    {
+        $sortedValuesList = $valuesList;
+        asort($sortedValuesList);
+        \PHPUnit_Framework_Assert::assertTrue($valuesList === $sortedValuesList);
+    }
+
 }
