@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Tests\acceptance\Admin\Countries;
+namespace Tests\Page\Admin\Countries;
 
 
 class CountryPage

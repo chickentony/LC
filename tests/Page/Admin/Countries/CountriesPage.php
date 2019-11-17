@@ -3,7 +3,7 @@
 namespace Tests\Page\Admin\Countries;
 
 use AcceptanceTester;
-use Tests\acceptance\Admin\Countries\CountryPage;
+use Tests\Page\Admin\Countries\CountryPage;
 
 class CountriesPage
 {
