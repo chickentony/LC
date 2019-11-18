@@ -46,4 +46,14 @@ class Acceptance extends \Codeception\Module
         \PHPUnit_Framework_Assert::assertTrue($valuesList === $sortedValuesList);
     }
 
+    public function getFont()
+    {
+        /** @var \Codeception\Module\WebDriver $webDriver */
+        $webDriver = $this->getModule('WebDriver');
+        $result = $webDriver->executeInSelenium(function (\Facebook\WebDriver\WebDriver $driver){
+            return $driver->findElement(\WebDriverBy::xpath('//*[@class="regular-price"]'))->getCSSValue('font-size');
+        });
+        return $result;
+    }
+
 }
