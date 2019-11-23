@@ -1,4 +1,5 @@
 <?php
+
 namespace Helper;
 
 // here you can define custom actions
@@ -46,13 +47,21 @@ class Acceptance extends \Codeception\Module
         \PHPUnit_Framework_Assert::assertTrue($valuesList === $sortedValuesList);
     }
 
-    public function getFont()
+    /**
+     * @param string $locator
+     * @param string $cssProperty
+     * @return mixed
+     * @throws \Codeception\Exception\ModuleException
+     */
+    public function getCssProperty(string $locator, string $cssProperty)
     {
         /** @var \Codeception\Module\WebDriver $webDriver */
         $webDriver = $this->getModule('WebDriver');
-        $result = $webDriver->executeInSelenium(function (\Facebook\WebDriver\WebDriver $driver){
-            return $driver->findElement(\WebDriverBy::xpath('//*[@class="regular-price"]'))->getCSSValue('font-size');
+        $result = $webDriver->
+        executeInSelenium(function (\Facebook\WebDriver\WebDriver $driver) use ($locator, $cssProperty) {
+            return $driver->findElement(\WebDriverBy::xpath($locator))->getCSSValue($cssProperty);
         });
+
         return $result;
     }
 
