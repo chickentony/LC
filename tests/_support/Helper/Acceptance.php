@@ -48,6 +48,7 @@ class Acceptance extends \Codeception\Module
     }
 
     /**
+     * Поулчает указанное css свойство элекмента по его x-path
      * @param string $locator
      * @param string $cssProperty
      * @return mixed
