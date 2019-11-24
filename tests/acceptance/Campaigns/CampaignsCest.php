@@ -32,6 +32,11 @@ class CampaignsCest
         // Проверяем что открылся тот самый товар и у него корректное название
         $I->see('RD001');
         $I->see('Yellow Duck');
+        //Проверям что цена указано верно
+        $regularPrice = $campaignPage->grabProductPrice($campaignPage::REGULAR_PRICE);
+        $I->assertTrue($regularPrice === '$20');
+        $campaignPrice = $campaignPage->grabProductPrice($campaignPage::CAMPAIGN_PRICE);
+        $I->assertTrue($campaignPrice === '$18');
         // Проверяем стили цен на странице акционного товара
         $campaignPage->getRegularPriceCssProperties();
         $I->assertTrue($campaignPage->regularPriceCssProperties['fontSize'] === '16px');

@@ -66,4 +66,14 @@ class CampaignPage
         getCssProperty(self::CAMPAIGN_PRICE, 'text-decoration');
     }
 
+    /**
+     * Возвращает цену товара
+     * @param string $locator
+     * @return mixed
+     */
+    public function grabProductPrice(string $locator)
+    {
+        return $this->tester->grabTextFrom($locator);
+    }
+
 }
