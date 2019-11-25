@@ -8,16 +8,16 @@ class MainPage
 {
     /** @var array Массив свойст обычной цены */
     public $regularPriceCssProperties = [
-        'fontSize' => '',
+        'font-size' => '',
         'color' => '',
-        'textDecoration' => ''
+        'text-decoration' => ''
     ];
 
     /** @var array Массив свойст скидочной цены */
     public $campaignPriceCssProperties = [
-        'fontSize' => '',
+        'font-size' => '',
         'color' => '',
-        'textDecoration' => ''
+        'text-decoration' => ''
     ];
 
     /** @var string Элемент с обычной ценой */
@@ -74,12 +74,9 @@ class MainPage
      */
     public function getRegularPriceCssProperties()
     {
-        $this->regularPriceCssProperties['fontSize'] = $this->tester->
-        getCssProperty(self::REGULAR_PRICE, 'font-size');
-        $this->regularPriceCssProperties['color'] = $this->tester->
-        getCssProperty(self::REGULAR_PRICE, 'color');
-        $this->regularPriceCssProperties['textDecoration'] = $this->tester->
-        getCssProperty(self::REGULAR_PRICE, 'text-decoration');
+        foreach ($this->regularPriceCssProperties as $k => $v) {
+            $this->regularPriceCssProperties[$k] = $this->tester->getCssProperty(self::REGULAR_PRICE, $k);
+        }
     }
 
     /**
@@ -88,12 +85,9 @@ class MainPage
      */
     public function getCampaignPriceCssProperties()
     {
-        $this->campaignPriceCssProperties['fontSize'] = $this->tester->
-        getCssProperty(self::CAMPAIGN_PRICE, 'font-size');
-        $this->campaignPriceCssProperties['color'] = $this->tester->
-        getCssProperty(self::CAMPAIGN_PRICE, 'color');
-        $this->campaignPriceCssProperties['textDecoration'] = $this->tester->
-        getCssProperty(self::CAMPAIGN_PRICE, 'text-decoration');
+        foreach ($this->campaignPriceCssProperties as $k => $v) {
+            $this->campaignPriceCssProperties[$k] = $this->tester->getCssProperty(self::CAMPAIGN_PRICE, $k);
+        }
     }
 
 }
