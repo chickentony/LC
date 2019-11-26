@@ -44,6 +44,8 @@ class MainPage
     /** @var string Первый акционный элемент */
     public const CAMPAIGN_FIRST_ITEM = '//div[@id="box-campaigns"]//a[@class="link"]';
 
+    public const REGISTRATION_LINK = '//form[@name="login_form"]//table//a';
+
     /**
      * MainPage constructor.
      * @param AcceptanceTester $tester
