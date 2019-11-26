@@ -3,6 +3,7 @@
 namespace Tests\Page\Main;
 
 use AcceptanceTester;
+use Tests\Page\Main\Registration\RegistrationPage;
 
 class MainPage
 {
@@ -44,17 +45,22 @@ class MainPage
     /** @var string Первый акционный элемент */
     public const CAMPAIGN_FIRST_ITEM = '//div[@id="box-campaigns"]//a[@class="link"]';
 
+    public const REGISTRATION_LINK = '//form[@name="login_form"]//table//a';
+
     /**
      * MainPage constructor.
      * @param AcceptanceTester $tester
      */
-    public function __construct(AcceptanceTester $tester)
+    public function __construct(AcceptanceTester $tester, RegistrationPage $registrationPage)
     {
         $this->tester = $tester;
+        $this->registrationPage = $registrationPage;
     }
 
     /** @var AcceptanceTester */
     protected $tester;
+
+    public $registrationPage;
 
     /**
      * Авторизация пользователя
