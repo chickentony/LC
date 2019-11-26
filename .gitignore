@@ -1,6 +1,7 @@
 tests/_output/*
-vendor/*
-cache/*
-data/errors.log
-vqmod/checked.cache
+tests/_support/_generated/*
+/vendor
+/cache
+/data/errors.log
+/vqmod/checked.cache
 !.gitignore
