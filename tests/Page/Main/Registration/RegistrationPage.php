@@ -6,7 +6,9 @@ use AcceptanceTester;
 
 class RegistrationPage
 {
-    public $arr = ['a', 'b', 'c', 'd', 'e', 'f'];
+    public $arr = ['a', 'b', 'c', 'd', 'e', 'f', 'j', 'h', 'i', 'g', 'k', 'l', 'm', 'o', 'p', 'r', 's', 't'];
+
+    public $generatedEmail;
 
     public const FIRST_NAME_INPUT = '//*[@name="firstname"]';
 
@@ -18,8 +20,6 @@ class RegistrationPage
 
     public const CITY_INPUT = '//*[@name="city"]';
 
-//    public const COUNTRY_DROPDOWN = '';
-
     public const EMAIL_INPUT = '//*[@name="email"]';
 
     public const PHONE_INPUT = '//*[@name="phone"]';
@@ -27,6 +27,10 @@ class RegistrationPage
     public const PASSWORD_INPUT = '//*[@name="password"]';
 
     public const CONFIRM_PASSWORD_INPUT = '//*[@name="confirmed_password"]';
+
+    public const NEWSLETTER_CHECKBOX = '//*[@name="newsletter"]';
+
+    public const CREATE_ACCOUNT_BUTTON = '//*[@name="create_account"]';
 
     protected $tester;
 
@@ -40,12 +44,18 @@ class RegistrationPage
         $this->tester->fillField(self::FIRST_NAME_INPUT, 'Фредд');
         $this->tester->fillField(self::LAST_NAME_INPUT, 'Дерст');
         $this->tester->fillField(self::FIRST_ADDRESS_INPUT, 'Джексонвилл, Техас');
-        $this->tester->fillField(self::POST_CODE_INPUT, '12345');
+        $this->tester->fillField(self::POST_CODE_INPUT, '127425');
         $this->tester->fillField(self::CITY_INPUT, 'Техас');
-        $this->tester->fillField(self::EMAIL_INPUT, $this->getEmail($this->arr, 4));
+        $this->setEmail($this->arr, 4);
+        $this->tester->fillField(self::EMAIL_INPUT, $this->generatedEmail);
+        $this->tester->fillField(self::PHONE_INPUT, '81234567890');
+        $this->tester->fillField(self::PASSWORD_INPUT, '123qwe');
+        $this->tester->fillField(self::CONFIRM_PASSWORD_INPUT, '123qwe');
+        $this->tester->uncheckOption(self::NEWSLETTER_CHECKBOX);
+        $this->tester->click(self::CREATE_ACCOUNT_BUTTON);
     }
 
-    private function getEmail($letters, $num = 1)
+    private function setEmail($letters, $num = 1)
     {
         shuffle($letters);
         $result = [];
@@ -53,8 +63,7 @@ class RegistrationPage
             $result[] = $letters[$i];
         }
         $emailString = implode($result);
-
-        return "{$emailString}@test.ru";
+        $this->generatedEmail = "{$emailString}@test.ru";
     }
 
 

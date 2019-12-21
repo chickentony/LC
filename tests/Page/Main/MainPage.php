@@ -47,9 +47,12 @@ class MainPage
 
     public const REGISTRATION_LINK = '//form[@name="login_form"]//table//a';
 
+    public const LOGOUT_LINK = '//li//a[text()="Logout"]';
+
     /**
      * MainPage constructor.
      * @param AcceptanceTester $tester
+     * @param RegistrationPage $registrationPage
      */
     public function __construct(AcceptanceTester $tester, RegistrationPage $registrationPage)
     {
@@ -72,6 +75,11 @@ class MainPage
         $this->tester->fillField(self::EMAIL_INPUT, $login);
         $this->tester->fillField(self::PASSWORD_INPUT, $password);
         $this->tester->click(self::LOGIN_BUTTON);
+    }
+
+    public function logout()
+    {
+        $this->tester->click(self::LOGOUT_LINK);
     }
 
     /**

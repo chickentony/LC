@@ -18,6 +18,10 @@ class RegistrationCest
         $I->waitTillPageLoad($mainPage::LOGO_DIV);
         $I->click($mainPage::REGISTRATION_LINK);
         $mainPage->registrationPage->createAccount();
+        $I->waitTillPageLoad($mainPage::LOGO_DIV);
+        $mainPage->logout();
+        $I->see('You are now logged out.');
+        $mainPage->login($mainPage->registrationPage->generatedEmail, '123qwe');
     }
 
 }
