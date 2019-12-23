@@ -3,6 +3,7 @@
 namespace Tests\Page\Main;
 
 use AcceptanceTester;
+use Tests\Page\Main\Registration\RegistrationPage;
 
 class MainPage
 {
@@ -44,17 +45,28 @@ class MainPage
     /** @var string Первый акционный элемент */
     public const CAMPAIGN_FIRST_ITEM = '//div[@id="box-campaigns"]//a[@class="link"]';
 
+    /** @var string Ссылка на страницу регистрации */
+    public const REGISTRATION_LINK = '//form[@name="login_form"]//table//a';
+
+    /** @var string Ссылка на разлогин пользователя */
+    public const LOGOUT_LINK = '//li//a[text()="Logout"]';
+
     /**
      * MainPage constructor.
      * @param AcceptanceTester $tester
+     * @param RegistrationPage $registrationPage
      */
-    public function __construct(AcceptanceTester $tester)
+    public function __construct(AcceptanceTester $tester, RegistrationPage $registrationPage)
     {
         $this->tester = $tester;
+        $this->registrationPage = $registrationPage;
     }
 
     /** @var AcceptanceTester */
     protected $tester;
+
+    /** @var RegistrationPage */
+    public $registrationPage;
 
     /**
      * Авторизация пользователя
@@ -66,6 +78,12 @@ class MainPage
         $this->tester->fillField(self::EMAIL_INPUT, $login);
         $this->tester->fillField(self::PASSWORD_INPUT, $password);
         $this->tester->click(self::LOGIN_BUTTON);
+    }
+
+    /** Выход пользователя из акаунта */
+    public function logout()
+    {
+        $this->tester->click(self::LOGOUT_LINK);
     }
 
     /**
@@ -89,5 +107,4 @@ class MainPage
             $this->campaignPriceCssProperties[$k] = $this->tester->getCssProperty(self::CAMPAIGN_PRICE, $k);
         }
     }
-
 }
