@@ -21,7 +21,12 @@ class AddNewProductCest
         $I->amOnPage($catalogPage::PAGE_URL);
         $I->waitTillPageLoad($catalogPage::PAGE_HEADER);
         $catalogPage->clickOnAddNewProductButton();
-        $catalogPage->fillGeneralProductInformation();
+        $catalogPage->addNewProductPage->fillGeneralProductInformation();
+        $catalogPage->addNewProductPage->switchToInformationAboutProductTab();
+        $catalogPage->addNewProductPage->fillProductInformation();
+        $catalogPage->addNewProductPage->switchToProductPricesTab();
+        $catalogPage->addNewProductPage->fillProductPrice();
+        $catalogPage->addNewProductPage->clickOnSaveNewProductButton();
 //        $I->wait(5);
     }
 
