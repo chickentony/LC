@@ -16,6 +16,11 @@ class AddNewProductCest
         $I->see('You are now logged in as admin');
     }
 
+    /**
+     * @param AcceptanceTester $I
+     * @param CatalogPage $catalogPage
+     * @throws \Codeception\Exception\ModuleException
+     */
     public function addNewProduct(AcceptanceTester $I, CatalogPage $catalogPage)
     {
         $I->amOnPage($catalogPage::PAGE_URL);
@@ -27,7 +32,10 @@ class AddNewProductCest
         $catalogPage->addNewProductPage->switchToProductPricesTab();
         $catalogPage->addNewProductPage->fillProductPrice();
         $catalogPage->addNewProductPage->clickOnSaveNewProductButton();
-//        $I->wait(5);
+        $I->waitTillPageLoad($catalogPage::PAGE_HEADER);
+        // Проверяем, что наш товар добавился в конец общего спсика.
+        $productList = $catalogPage->getProductList();
+        $I->assertEquals('Тестовый товар 1', end($productList));
     }
 
 }

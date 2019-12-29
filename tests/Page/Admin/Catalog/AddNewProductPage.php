@@ -6,6 +6,7 @@ use AcceptanceTester;
 
 class AddNewProductPage
 {
+    /** @var array Поля с обязательной информацией о товаре */
     public const GENERAL_INFORMATION_FIELDS = [
         'PRODUCT_NAME_INPUT' => '//*[@name="name[en]"]',
         'PRODUCT_STATUS_RADIO' => '//*[@name="status"]',
@@ -15,8 +16,10 @@ class AddNewProductPage
         'PRODUCT_IMAGE_FILE' => '//*[@name="new_images[]"]'
     ];
 
+    /** @var string Вкладка с информацией о товаре */
     public const PRODUCT_INFORMATION_TAB = '//a[text()="Information"]';
 
+    /** @var array Поля с информацией о товаре */
     public const INFORMATION_FIELDS = [
         'MANUFACTURER_SELECTOR' => '//*[@name="manufacturer_id"]',
         'MANUFACTURE_OPTION' => '//*[@value="1" and text()="ACME Corp."]',
@@ -25,6 +28,7 @@ class AddNewProductPage
         'HEAD_TITLE_INPUT' => '//*[@name="head_title[en]"]'
     ];
 
+    /** @var array Поля с ценой товаре */
     public const PRICE_FIELDS = [
         'PURCHASE_PRICE_INPUT' => '//*[@name="purchase_price"]',
         'PURCHASE_PRICE_TYPE_SELECTOR' => '//*[@name="purchase_price_currency_code"]',
@@ -32,17 +36,25 @@ class AddNewProductPage
         'PRICE_INPUT' => '//*[@name="prices[USD]"]'
     ];
 
+    /** @var string Вкладка с ценами товара */
     public const PRODUCT_PRICES_TAB = '//a[text()="Prices"]';
 
+    /** @var string Кнопка сохранения нового товара */
     public const SAVE_NEW_PRODUCT_BUTTON = '//*[@name="save"]';
 
+    /** @var AcceptanceTester */
     protected $tester;
 
+    /**
+     * AddNewProductPage constructor.
+     * @param AcceptanceTester $tester
+     */
     public function __construct(AcceptanceTester $tester)
     {
         $this->tester = $tester;
     }
 
+    /** Заполняет обязательную информацию о товаре */
     public function fillGeneralProductInformation()
     {
         $this->tester->click(self::GENERAL_INFORMATION_FIELDS['PRODUCT_NAME_INPUT']);
@@ -57,11 +69,13 @@ class AddNewProductPage
         $this->tester->attachFile(self::GENERAL_INFORMATION_FIELDS['PRODUCT_IMAGE_FILE'], 'nature1.jpg');
     }
 
+    /** Переключается на вкладку с дополнительной информацией о товаре */
     public function switchToInformationAboutProductTab()
     {
         $this->tester->click(self::PRODUCT_INFORMATION_TAB);
     }
 
+    /** Заполняет дополнительную информацию о товаре  */
     public function fillProductInformation()
     {
         $this->tester->click(self::INFORMATION_FIELDS['MANUFACTURER_SELECTOR']);
@@ -77,11 +91,13 @@ class AddNewProductPage
         $this->tester->fillField(self::INFORMATION_FIELDS['HEAD_TITLE_INPUT'], 'This is a head title');
     }
 
+    /** Переключается на вкладку с ценами товара */
     public function switchToProductPricesTab()
     {
         $this->tester->click(self::PRODUCT_PRICES_TAB);
     }
 
+    /** Заполняет цены товара */
     public function fillProductPrice()
     {
         $this->tester->click(self::PRICE_FIELDS['PURCHASE_PRICE_INPUT']);
@@ -94,6 +110,7 @@ class AddNewProductPage
         $this->tester->fillField(self::PRICE_FIELDS['PRICE_INPUT'], 20);
     }
 
+    /** Кликает на кнопку "Сохранить" */
     public function clickOnSaveNewProductButton()
     {
         $this->tester->click(self::SAVE_NEW_PRODUCT_BUTTON);
