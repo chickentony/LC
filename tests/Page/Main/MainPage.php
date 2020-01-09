@@ -3,6 +3,7 @@
 namespace Tests\Page\Main;
 
 use AcceptanceTester;
+use Tests\Page\Main\Categories\CategoryPage;
 use Tests\Page\Main\Registration\RegistrationPage;
 
 class MainPage
@@ -51,15 +52,21 @@ class MainPage
     /** @var string Ссылка на разлогин пользователя */
     public const LOGOUT_LINK = '//li//a[text()="Logout"]';
 
+    public const CATEGORY_LINK = '//div[@id="box-category-tree" ]//a';
+
     /**
      * MainPage constructor.
      * @param AcceptanceTester $tester
      * @param RegistrationPage $registrationPage
      */
-    public function __construct(AcceptanceTester $tester, RegistrationPage $registrationPage)
+    public function __construct(AcceptanceTester $tester,
+                                RegistrationPage $registrationPage,
+                                CategoryPage $categoryPage
+    )
     {
         $this->tester = $tester;
         $this->registrationPage = $registrationPage;
+        $this->categoryPage = $categoryPage;
     }
 
     /** @var AcceptanceTester */
@@ -67,6 +74,8 @@ class MainPage
 
     /** @var RegistrationPage */
     public $registrationPage;
+
+    public $categoryPage;
 
     /**
      * Авторизация пользователя
@@ -106,5 +115,11 @@ class MainPage
         foreach ($this->campaignPriceCssProperties as $k => $v) {
             $this->campaignPriceCssProperties[$k] = $this->tester->getCssProperty(self::CAMPAIGN_PRICE, $k);
         }
+    }
+
+    public function clickOnCategoryLink($category)
+    {
+        $this->tester->waitForElementVisible($category);
+        $this->tester->click($category);
     }
 }
