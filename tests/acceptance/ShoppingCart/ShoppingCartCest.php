@@ -16,9 +16,16 @@ class ShoppingCartCest
     {
         $I->amOnPage($mainPage::MAIN_PAGE_URL);
         $I->waitTillPageLoad($mainPage::LOGO_DIV);
-        $mainPage->clickOnCategoryLink($mainPage::CATEGORY_LINK);
-        $mainPage->categoryPage->openProduct($mainPage->categoryPage::FIRST_PRODUCT_DIV);
-        $mainPage->categoryPage->productPage->clickOnAddProductToCartButton();
+        $i = 0;
+        while ($i !== 3) {
+            $i++;
+            $mainPage->clickOnCategoryLink($mainPage::CATEGORY_LINK);
+            $mainPage->categoryPage->openProduct($mainPage->categoryPage::FIRST_PRODUCT_DIV);
+            $mainPage->categoryPage->productPage->clickOnAddProductToCartButton();
+            $mainPage->categoryPage->productPage->checkItemsCountInCart($i);
+            $mainPage->categoryPage->productPage->clickOnHomeIcon($mainPage::HOME_ICON);
+        }
+
 //        $I->wait(5);
     }
 

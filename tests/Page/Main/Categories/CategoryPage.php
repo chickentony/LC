@@ -6,7 +6,7 @@ use AcceptanceTester;
 
 class CategoryPage
 {
-    public const FIRST_PRODUCT_DIV = '//div[@class="image-wrapper"]//img[@alt="Purple Duck"]';
+    public const FIRST_PRODUCT_DIV = '//div[@class="image-wrapper"]//img[@alt="Green Duck"]';
 
     protected $tester;
 
@@ -18,10 +18,10 @@ class CategoryPage
         $this->productPage = $productPage;
     }
 
-    public function openProduct($product)
+    public function openProduct(string $productXPath)
     {
-        $this->tester->moveMouseOver($product);
-        $this->tester->click($product);
+        $this->tester->moveMouseOver($productXPath);
+        $this->tester->click($productXPath);
     }
 
 }

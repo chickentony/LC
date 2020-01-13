@@ -54,10 +54,13 @@ class MainPage
 
     public const CATEGORY_LINK = '//div[@id="box-category-tree" ]//a';
 
+    public const HOME_ICON = '//*[@title="Home"]';
+
     /**
      * MainPage constructor.
      * @param AcceptanceTester $tester
      * @param RegistrationPage $registrationPage
+     * @param CategoryPage $categoryPage
      */
     public function __construct(AcceptanceTester $tester,
                                 RegistrationPage $registrationPage,

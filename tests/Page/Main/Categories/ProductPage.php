@@ -18,6 +18,20 @@ class ProductPage
     public function clickOnAddProductToCartButton()
     {
         $this->tester->click(self::ADD_PRODUCT_TO_CART_BUTTON);
+        $this->tester->wait(2);
+        $this->tester->closePopup('Error');
+        $this->tester->reloadPage();
+    }
+
+    public function checkItemsCountInCart(int $iterator)
+    {
+        $itemsCount = $this->tester->grabTextFrom('//div[@id="cart"]//a//span[@class="quantity"]');
+        $this->tester->assertEquals((int)$itemsCount, $iterator);
+    }
+
+    public function clickOnHomeIcon(string $homeIconXPath)
+    {
+        $this->tester->click($homeIconXPath);
     }
 
 }
