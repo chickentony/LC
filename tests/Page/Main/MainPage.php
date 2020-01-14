@@ -56,6 +56,10 @@ class MainPage
 
     public const HOME_ICON = '//*[@title="Home"]';
 
+    public const SHOPPING_CART_ICON = '//div[@id="cart"]//img';
+
+    public const SHOPPING_CART_ITEMS_COUNT_SPAN = '//div[@id="cart"]//a//span[@class="quantity"]';
+
     /**
      * MainPage constructor.
      * @param AcceptanceTester $tester
@@ -124,5 +128,25 @@ class MainPage
     {
         $this->tester->waitForElementVisible($category);
         $this->tester->click($category);
+    }
+
+    public function clickOnShoppingCartIcon()
+    {
+        $this->tester->waitForElementVisible(self::SHOPPING_CART_ICON);
+        $this->tester->click(self::SHOPPING_CART_ICON);
+    }
+
+    public function addDifferentProductsToShoppingCart()
+    {
+        $i = 0;
+        foreach ($this->categoryPage::PRODUCT_LIST as $productName => $productXpath) {
+            $i++;
+            $this->clickOnCategoryLink(MainPage::CATEGORY_LINK);
+            $this->categoryPage->openProduct($productXpath);
+            $this->categoryPage->productPage->clickOnAddProductToCartButton();
+            $this->categoryPage->productPage->checkItemsCountInCart($i, self::SHOPPING_CART_ITEMS_COUNT_SPAN);
+            $this->categoryPage->productPage->clickOnHomeIcon($this::HOME_ICON);
+        }
+
     }
 }

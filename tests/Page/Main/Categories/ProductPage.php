@@ -23,9 +23,9 @@ class ProductPage
         $this->tester->reloadPage();
     }
 
-    public function checkItemsCountInCart(int $iterator)
+    public function checkItemsCountInCart(int $iterator, string $itemsCount)
     {
-        $itemsCount = $this->tester->grabTextFrom('//div[@id="cart"]//a//span[@class="quantity"]');
+        $itemsCount = $this->tester->grabTextFrom($itemsCount);
         $this->tester->assertEquals((int)$itemsCount, $iterator);
     }
 
