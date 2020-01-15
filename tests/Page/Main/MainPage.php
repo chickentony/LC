@@ -5,6 +5,7 @@ namespace Tests\Page\Main;
 use AcceptanceTester;
 use Tests\Page\Main\Categories\CategoryPage;
 use Tests\Page\Main\Registration\RegistrationPage;
+use Tests\Page\Main\ShoppingCart\ShoppingCartPage;
 
 class MainPage
 {
@@ -68,12 +69,14 @@ class MainPage
      */
     public function __construct(AcceptanceTester $tester,
                                 RegistrationPage $registrationPage,
-                                CategoryPage $categoryPage
+                                CategoryPage $categoryPage,
+                                ShoppingCartPage $shoppingCartPage
     )
     {
         $this->tester = $tester;
         $this->registrationPage = $registrationPage;
         $this->categoryPage = $categoryPage;
+        $this->shoppingCartPage = $shoppingCartPage;
     }
 
     /** @var AcceptanceTester */
@@ -83,6 +86,8 @@ class MainPage
     public $registrationPage;
 
     public $categoryPage;
+
+    public $shoppingCartPage;
 
     /**
      * Авторизация пользователя

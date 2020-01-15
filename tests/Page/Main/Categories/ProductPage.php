@@ -26,6 +26,7 @@ class ProductPage
     public function checkItemsCountInCart(int $iterator, string $itemsCount)
     {
         $itemsCount = $this->tester->grabTextFrom($itemsCount);
+        //ToDO: assert need to be moved in test
         $this->tester->assertEquals((int)$itemsCount, $iterator);
     }
 

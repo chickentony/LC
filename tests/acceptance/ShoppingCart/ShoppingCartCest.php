@@ -17,18 +17,14 @@ class ShoppingCartCest
         $I->amOnPage($mainPage::MAIN_PAGE_URL);
         $I->waitTillPageLoad($mainPage::LOGO_DIV);
         $mainPage->addDifferentProductsToShoppingCart();
-//        $i = 0;
-//        while ($i !== 3) {
-//            $i++;
-//            $mainPage->clickOnCategoryLink($mainPage::CATEGORY_LINK);
-//            $mainPage->categoryPage->openProduct($mainPage->categoryPage::FIRST_PRODUCT_DIV);
-//            $mainPage->categoryPage->productPage->clickOnAddProductToCartButton();
-//            $mainPage->categoryPage->productPage->checkItemsCountInCart($i);
-//            $mainPage->categoryPage->productPage->clickOnHomeIcon($mainPage::HOME_ICON);
-//        }
         $mainPage->clickOnShoppingCartIcon();
-
-
+        $totalItemsInCart = $mainPage->shoppingCartPage->getCountOfItemsInCart();
+        $I->assertEquals(3, $totalItemsInCart);
+        //This must be a loop
+        $mainPage->shoppingCartPage->removeItemFromCart();
+        $mainPage->shoppingCartPage->waitTillCommonCountOfItemsInCartWillDecrease(2, 2);
+        $currentItemsCount = $mainPage->shoppingCartPage->getCountOfItemsInCart();
+        $I->assertEquals(2, $currentItemsCount);
 //        $I->wait(5);
     }
 
