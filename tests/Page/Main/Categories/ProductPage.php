@@ -6,15 +6,25 @@ use AcceptanceTester;
 
 class ProductPage
 {
+    /** @var string Кнопка добавления товара в корзину */
     public const ADD_PRODUCT_TO_CART_BUTTON = '//*[@name="add_cart_product"]';
 
+    /** @var AcceptanceTester */
     protected $tester;
 
+    /**
+     * ProductPage constructor.
+     * @param AcceptanceTester $tester
+     */
     public function __construct(AcceptanceTester $tester)
     {
         $this->tester = $tester;
     }
 
+    /**
+     * @throws \Codeception\Exception\ModuleException
+     * Добавляет товар в корзину
+     */
     public function clickOnAddProductToCartButton()
     {
         $this->tester->click(self::ADD_PRODUCT_TO_CART_BUTTON);
@@ -23,6 +33,11 @@ class ProductPage
         $this->tester->reloadPage();
     }
 
+    /**
+     * @param int $iterator
+     * @param string $itemsCount
+     * Проверяет кол-во добавленных товаров в корзине
+     */
     public function checkItemsCountInCart(int $iterator, string $itemsCount)
     {
         $itemsCount = $this->tester->grabTextFrom($itemsCount);
@@ -30,6 +45,10 @@ class ProductPage
         $this->tester->assertEquals((int)$itemsCount, $iterator);
     }
 
+    /**
+     * @param string $homeIconXPath
+     * Кликает на иконку "Домой"
+     */
     public function clickOnHomeIcon(string $homeIconXPath)
     {
         $this->tester->click($homeIconXPath);

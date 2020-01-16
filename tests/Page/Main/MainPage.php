@@ -53,12 +53,16 @@ class MainPage
     /** @var string Ссылка на разлогин пользователя */
     public const LOGOUT_LINK = '//li//a[text()="Logout"]';
 
+    /** @var string Ссылка на категорию товаров */
     public const CATEGORY_LINK = '//div[@id="box-category-tree" ]//a';
 
+    /** @var string Иконка "Домой" */
     public const HOME_ICON = '//*[@title="Home"]';
 
+    /** @var string Иконка корзины с покупками */
     public const SHOPPING_CART_ICON = '//div[@id="cart"]//img';
 
+    /** @var string Счетчик товаров в корзине */
     public const SHOPPING_CART_ITEMS_COUNT_SPAN = '//div[@id="cart"]//a//span[@class="quantity"]';
 
     /**
@@ -66,6 +70,7 @@ class MainPage
      * @param AcceptanceTester $tester
      * @param RegistrationPage $registrationPage
      * @param CategoryPage $categoryPage
+     * @param ShoppingCartPage $shoppingCartPage
      */
     public function __construct(AcceptanceTester $tester,
                                 RegistrationPage $registrationPage,
@@ -85,8 +90,10 @@ class MainPage
     /** @var RegistrationPage */
     public $registrationPage;
 
+    /** @var CategoryPage */
     public $categoryPage;
 
+    /** @var ShoppingCartPage */
     public $shoppingCartPage;
 
     /**
@@ -129,18 +136,31 @@ class MainPage
         }
     }
 
-    public function clickOnCategoryLink($category)
+    /**
+     * @param $category
+     * @throws \Exception
+     * Клиает на ссылку категории
+     */
+    public function clickOnCategoryLink(string $category)
     {
         $this->tester->waitForElementVisible($category);
         $this->tester->click($category);
     }
 
+    /**
+     * @throws \Exception
+     * Кликает на иконку корзины с товарами
+     */
     public function clickOnShoppingCartIcon()
     {
         $this->tester->waitForElementVisible(self::SHOPPING_CART_ICON);
         $this->tester->click(self::SHOPPING_CART_ICON);
     }
 
+    /**
+     * @throws \Exception
+     * Добавляет несколько разны товаров в корзину
+     */
     public function addDifferentProductsToShoppingCart()
     {
         $i = 0;
@@ -152,6 +172,5 @@ class MainPage
             $this->categoryPage->productPage->checkItemsCountInCart($i, self::SHOPPING_CART_ITEMS_COUNT_SPAN);
             $this->categoryPage->productPage->clickOnHomeIcon($this::HOME_ICON);
         }
-
     }
 }

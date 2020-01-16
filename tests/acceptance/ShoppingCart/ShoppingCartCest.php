@@ -11,6 +11,7 @@ class ShoppingCartCest
      * @param AcceptanceTester $I
      * @param MainPage $mainPage
      * @throws \Codeception\Exception\ModuleException
+     * @throws \Exception
      */
     public function addProductToCart(AcceptanceTester $I, MainPage $mainPage)
     {
@@ -20,12 +21,7 @@ class ShoppingCartCest
         $mainPage->clickOnShoppingCartIcon();
         $totalItemsInCart = $mainPage->shoppingCartPage->getCountOfItemsInCart();
         $I->assertEquals(3, $totalItemsInCart);
-        //This must be a loop
-        $mainPage->shoppingCartPage->removeItemFromCart();
-        $mainPage->shoppingCartPage->waitTillCommonCountOfItemsInCartWillDecrease(2, 2);
-        $currentItemsCount = $mainPage->shoppingCartPage->getCountOfItemsInCart();
-        $I->assertEquals(2, $currentItemsCount);
-//        $I->wait(5);
+        $mainPage->shoppingCartPage->sequentialDeletionItemsFromCart($mainPage->categoryPage::PRODUCT_LIST, 1);
+        $I->see('There are no items in your cart.');
     }
-
 }
