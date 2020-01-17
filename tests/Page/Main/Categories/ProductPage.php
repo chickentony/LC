@@ -9,6 +9,9 @@ class ProductPage
     /** @var string Кнопка добавления товара в корзину */
     public const ADD_PRODUCT_TO_CART_BUTTON = '//*[@name="add_cart_product"]';
 
+    /** @var string Иконка "Домой" */
+    public const HOME_ICON = '//*[@title="Home"]';
+
     /** @var AcceptanceTester */
     protected $tester;
 
@@ -28,6 +31,7 @@ class ProductPage
     public function clickOnAddProductToCartButton()
     {
         $this->tester->click(self::ADD_PRODUCT_TO_CART_BUTTON);
+        // ToDO: think about wait(2)
         $this->tester->wait(2);
         $this->tester->closePopup('Error');
         $this->tester->reloadPage();
@@ -35,23 +39,22 @@ class ProductPage
 
     /**
      * @param int $iterator
-     * @param string $itemsCount
-     * Проверяет кол-во добавленных товаров в корзине
+     * @param string $itemsCountXPath
      */
-    public function checkItemsCountInCart(int $iterator, string $itemsCount)
+    public function checkItemsCountInCart(int $iterator, string $itemsCountXPath)
     {
-        $itemsCount = $this->tester->grabTextFrom($itemsCount);
+        $count = $this->tester->grabTextFrom($itemsCountXPath);
         //ToDO: assert need to be moved in test
-        $this->tester->assertEquals((int)$itemsCount, $iterator);
+        $this->tester->assertEquals((int)$count, $iterator);
     }
 
     /**
      * @param string $homeIconXPath
      * Кликает на иконку "Домой"
      */
-    public function clickOnHomeIcon(string $homeIconXPath)
+    public function clickOnHomeIcon()
     {
-        $this->tester->click($homeIconXPath);
+        $this->tester->click(self::HOME_ICON);
     }
 
 }

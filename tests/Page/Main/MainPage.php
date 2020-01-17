@@ -56,9 +56,6 @@ class MainPage
     /** @var string Ссылка на категорию товаров */
     public const CATEGORY_LINK = '//div[@id="box-category-tree" ]//a';
 
-    /** @var string Иконка "Домой" */
-    public const HOME_ICON = '//*[@title="Home"]';
-
     /** @var string Иконка корзины с покупками */
     public const SHOPPING_CART_ICON = '//div[@id="cart"]//img';
 
@@ -73,9 +70,9 @@ class MainPage
      * @param ShoppingCartPage $shoppingCartPage
      */
     public function __construct(AcceptanceTester $tester,
-                                RegistrationPage $registrationPage,
-                                CategoryPage $categoryPage,
-                                ShoppingCartPage $shoppingCartPage
+        RegistrationPage $registrationPage,
+        CategoryPage $categoryPage,
+        ShoppingCartPage $shoppingCartPage
     )
     {
         $this->tester = $tester;
@@ -170,7 +167,7 @@ class MainPage
             $this->categoryPage->openProduct($productXpath);
             $this->categoryPage->productPage->clickOnAddProductToCartButton();
             $this->categoryPage->productPage->checkItemsCountInCart($i, self::SHOPPING_CART_ITEMS_COUNT_SPAN);
-            $this->categoryPage->productPage->clickOnHomeIcon($this::HOME_ICON);
+            $this->categoryPage->productPage->clickOnHomeIcon();
         }
     }
 }
