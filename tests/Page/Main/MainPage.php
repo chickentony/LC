@@ -69,7 +69,8 @@ class MainPage
      * @param CategoryPage $categoryPage
      * @param ShoppingCartPage $shoppingCartPage
      */
-    public function __construct(AcceptanceTester $tester,
+    public function __construct(
+        AcceptanceTester $tester,
         RegistrationPage $registrationPage,
         CategoryPage $categoryPage,
         ShoppingCartPage $shoppingCartPage

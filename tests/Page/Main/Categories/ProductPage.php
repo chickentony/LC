@@ -48,10 +48,7 @@ class ProductPage
         $this->tester->assertEquals((int)$count, $iterator);
     }
 
-    /**
-     * @param string $homeIconXPath
-     * Кликает на иконку "Домой"
-     */
+    /** Кликает на иконку "Домой"*/
     public function clickOnHomeIcon()
     {
         $this->tester->click(self::HOME_ICON);
