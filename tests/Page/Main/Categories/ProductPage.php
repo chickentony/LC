@@ -43,9 +43,9 @@ class ProductPage
      */
     public function checkItemsCountInCart(int $iterator, string $itemsCountXPath)
     {
-        $count = $this->tester->grabTextFrom($itemsCountXPath);
+        $count = (int)$this->tester->grabTextFrom($itemsCountXPath);
         //ToDO: assert need to be moved in test
-        $this->tester->assertEquals((int)$count, $iterator);
+        $this->tester->assertEquals($count, $iterator);
     }
 
     /** Кликает на иконку "Домой"*/
