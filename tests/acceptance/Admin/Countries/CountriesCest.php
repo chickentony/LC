@@ -51,6 +51,8 @@ class CountriesCest
         $I->amOnPage($countriesPage::PAGE_URL);
         $I->waitTillPageLoad($countriesPage::PAGE_HEADER);
         $countriesPage->editCountry($countriesPage::COUNTRY_LIST['1']);
+//        $I->click($countriesPage->countryPage::EXTERNAL_LINKS);
+        $countriesPage->countryPage->clickOnExternalLinks();
         $I->wait(3);
 
     }

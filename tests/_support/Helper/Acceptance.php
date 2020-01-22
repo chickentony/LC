@@ -66,4 +66,23 @@ class Acceptance extends \Codeception\Module
         return $result;
     }
 
+    /**
+     * @return array
+     * @throws \Codeception\Exception\ModuleException
+     */
+    public function getWindowHandles(): array
+    {
+        /** @var \Codeception\Module\WebDriver $webDriver */
+        $webDriver = $this->getModule('WebDriver');
+        return $webDriver->webDriver->getWindowHandles();
+    }
+
+    public function closeWindowById($id)
+    {
+        /** @var \Codeception\Module\WebDriver $webDriver */
+        $webDriver = $this->getModule('WebDriver');
+        $webDriver->switchToWindow($id);
+        $webDriver->closeTab();
+    }
+
 }
