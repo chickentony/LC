@@ -45,16 +45,19 @@ class CountriesCest
         $countriesPage->checkCountriesGeoZonesSort($xPath);
     }
 
+    /**
+     * @param AcceptanceTester $I
+     * @param CountriesPage $countriesPage
+     * @throws \Codeception\Exception\ModuleException
+     * @throws \Exception
+     */
     public function checkLinks(AcceptanceTester $I, CountriesPage $countriesPage)
     {
         $I->wantTo('Check that links inside country edit page opening in new browser tab');
         $I->amOnPage($countriesPage::PAGE_URL);
         $I->waitTillPageLoad($countriesPage::PAGE_HEADER);
         $countriesPage->editCountry($countriesPage::COUNTRY_LIST['1']);
-//        $I->click($countriesPage->countryPage::EXTERNAL_LINKS);
-        $countriesPage->countryPage->clickOnExternalLinks();
-        $I->wait(3);
-
+        $countriesPage->countryPage->clickOnExternalLinksAndCheckOpeningLink();
     }
 
 }

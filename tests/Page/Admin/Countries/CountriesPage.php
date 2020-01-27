@@ -42,6 +42,7 @@ class CountriesPage
     /** @var string Заголовок страницы со странами */
     public const PAGE_HEADER = '//h1[contains(., "Countries")]';
 
+    /** @var array Массив со странами */
     public const COUNTRY_LIST = [
         '1' => '//table[@class="dataTable"]//td//a[text()="Afghanistan"]'
     ];
@@ -115,6 +116,11 @@ class CountriesPage
         $this->geoZonesTitles = $geoZones;
     }
 
+    /**
+     * @param string $countryXPath
+     * @throws \Exception
+     * Открывает страницу редактирования страны
+     */
     public function editCountry(string $countryXPath)
     {
         $this->tester->waitForElementVisible($countryXPath);
