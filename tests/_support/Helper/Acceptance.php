@@ -67,6 +67,18 @@ class Acceptance extends \Codeception\Module
     }
 
     /**
+     * @param $popupMessage
+     * @throws \Codeception\Exception\ModuleException
+     */
+    public function closePopup(string $popupMessage)
+    {
+        /** @var \Codeception\Module\WebDriver $webDriver */
+        $webDriver = $this->getModule('WebDriver');
+        $webDriver->seeInPopup($popupMessage);
+        $webDriver->acceptPopup();
+    }
+
+    /**
      * @return array
      * @throws \Codeception\Exception\ModuleException
      */

@@ -3,7 +3,9 @@
 namespace Tests\Page\Main;
 
 use AcceptanceTester;
+use Tests\Page\Main\Categories\CategoryPage;
 use Tests\Page\Main\Registration\RegistrationPage;
+use Tests\Page\Main\ShoppingCart\ShoppingCartPage;
 
 class MainPage
 {
@@ -51,15 +53,33 @@ class MainPage
     /** @var string Ссылка на разлогин пользователя */
     public const LOGOUT_LINK = '//li//a[text()="Logout"]';
 
+    /** @var string Ссылка на категорию товаров */
+    public const CATEGORY_LINK = '//div[@id="box-category-tree" ]//a';
+
+    /** @var string Иконка корзины с покупками */
+    public const SHOPPING_CART_ICON = '//div[@id="cart"]//img';
+
+    /** @var string Счетчик товаров в корзине */
+    public const SHOPPING_CART_ITEMS_COUNT_SPAN = '//div[@id="cart"]//a//span[@class="quantity"]';
+
     /**
      * MainPage constructor.
      * @param AcceptanceTester $tester
      * @param RegistrationPage $registrationPage
+     * @param CategoryPage $categoryPage
+     * @param ShoppingCartPage $shoppingCartPage
      */
-    public function __construct(AcceptanceTester $tester, RegistrationPage $registrationPage)
+    public function __construct(
+        AcceptanceTester $tester,
+        RegistrationPage $registrationPage,
+        CategoryPage $categoryPage,
+        ShoppingCartPage $shoppingCartPage
+    )
     {
         $this->tester = $tester;
         $this->registrationPage = $registrationPage;
+        $this->categoryPage = $categoryPage;
+        $this->shoppingCartPage = $shoppingCartPage;
     }
 
     /** @var AcceptanceTester */
@@ -67,6 +87,12 @@ class MainPage
 
     /** @var RegistrationPage */
     public $registrationPage;
+
+    /** @var CategoryPage */
+    public $categoryPage;
+
+    /** @var ShoppingCartPage */
+    public $shoppingCartPage;
 
     /**
      * Авторизация пользователя
@@ -105,6 +131,44 @@ class MainPage
     {
         foreach ($this->campaignPriceCssProperties as $k => $v) {
             $this->campaignPriceCssProperties[$k] = $this->tester->getCssProperty(self::CAMPAIGN_PRICE, $k);
+        }
+    }
+
+    /**
+     * @param $category
+     * @throws \Exception
+     * Клиает на ссылку категории
+     */
+    public function clickOnCategoryLink(string $category)
+    {
+        $this->tester->waitForElementVisible($category);
+        $this->tester->click($category);
+    }
+
+    /**
+     * @throws \Exception
+     * Кликает на иконку корзины с товарами
+     */
+    public function clickOnShoppingCartIcon()
+    {
+        $this->tester->waitForElementVisible(self::SHOPPING_CART_ICON);
+        $this->tester->click(self::SHOPPING_CART_ICON);
+    }
+
+    /**
+     * @throws \Exception
+     * Добавляет несколько разны товаров в корзину
+     */
+    public function addDifferentProductsToShoppingCart()
+    {
+        $i = 0;
+        foreach ($this->categoryPage::PRODUCT_LIST as $productName => $productXpath) {
+            $i++;
+            $this->clickOnCategoryLink(MainPage::CATEGORY_LINK);
+            $this->categoryPage->openProduct($productXpath);
+            $this->categoryPage->productPage->clickOnAddProductToCartButton();
+            $this->categoryPage->productPage->checkItemsCountInCart($i, self::SHOPPING_CART_ITEMS_COUNT_SPAN);
+            $this->categoryPage->productPage->clickOnHomeIcon();
         }
     }
 }
