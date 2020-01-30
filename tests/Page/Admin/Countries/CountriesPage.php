@@ -44,7 +44,7 @@ class CountriesPage
 
     /** @var array Массив со странами */
     public const COUNTRY_LIST = [
-        '1' => '//table[@class="dataTable"]//td//a[text()="Afghanistan"]'
+        'Afghanistan' => '//table[@class="dataTable"]//td//a[text()="Afghanistan"]'
     ];
 
     /**
@@ -117,14 +117,14 @@ class CountriesPage
     }
 
     /**
-     * @param string $countryXPath
+     * @param string $countryName
      * @throws \Exception
      * Открывает страницу редактирования страны
      */
-    public function editCountry(string $countryXPath)
+    public function editCountry(string $countryName)
     {
-        $this->tester->waitForElementVisible($countryXPath);
-        $this->tester->click($countryXPath);
+        $this->tester->waitForElementVisible($countryName);
+        $this->tester->click($countryName);
     }
 
 }

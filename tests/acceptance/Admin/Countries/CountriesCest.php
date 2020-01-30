@@ -56,7 +56,7 @@ class CountriesCest
         $I->wantTo('Check that links inside country edit page opening in new browser tab');
         $I->amOnPage($countriesPage::PAGE_URL);
         $I->waitTillPageLoad($countriesPage::PAGE_HEADER);
-        $countriesPage->editCountry($countriesPage::COUNTRY_LIST['1']);
+        $countriesPage->editCountry($countriesPage::COUNTRY_LIST['Afghanistan']);
         $countriesPage->countryPage->clickOnExternalLinksAndCheckOpeningLink();
     }
 

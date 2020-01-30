@@ -89,12 +89,31 @@ class Acceptance extends \Codeception\Module
         return $webDriver->webDriver->getWindowHandles();
     }
 
-    public function closeWindowById($id)
+    /**
+     * @param string $id
+     * @throws \Codeception\Exception\ModuleException
+     * Закрывает вкладку браузера по id
+     */
+    public function closeWindowById(string $id)
     {
         /** @var \Codeception\Module\WebDriver $webDriver */
         $webDriver = $this->getModule('WebDriver');
         $webDriver->switchToWindow($id);
         $webDriver->closeTab();
+    }
+
+    /**
+     * @param string $locator
+     * @return int
+     * @throws \Codeception\Exception\ModuleException
+     * Возвращает кол-во элементов на странице
+     */
+    public function getNumberOfElementsOnPage(string $locator)
+    {
+        /** @var \Codeception\Module\WebDriver $webDriver */
+        $webDriver = $this->getModule('WebDriver');
+
+        return count($webDriver->_findElements($locator));
     }
 
 }
