@@ -3,7 +3,6 @@
 namespace Tests\Page\Admin\Countries;
 
 use AcceptanceTester;
-use Tests\Page\Admin\Countries\CountryPage;
 
 class CountriesPage
 {
@@ -24,12 +23,11 @@ class CountriesPage
     /**
      * CountriesPage constructor.
      * @param AcceptanceTester $tester
-     * @param CountryPage $countryPage
      */
-    public function __construct(AcceptanceTester $tester, CountryPage $countryPage)
+    public function __construct(AcceptanceTester $tester)
     {
         $this->tester = $tester;
-        $this->countryPage = new CountryPage();
+        $this->countryPage = new CountryPage($tester);
     }
 
     /** @var string Название страны из списка всех стран */
@@ -43,6 +41,11 @@ class CountriesPage
 
     /** @var string Заголовок страницы со странами */
     public const PAGE_HEADER = '//h1[contains(., "Countries")]';
+
+    /** @var array Массив со странами */
+    public const COUNTRY_LIST = [
+        'Afghanistan' => '//table[@class="dataTable"]//td//a[text()="Afghanistan"]'
+    ];
 
     /**
      * @param $element
@@ -111,6 +114,17 @@ class CountriesPage
             }
         }
         $this->geoZonesTitles = $geoZones;
+    }
+
+    /**
+     * @param string $countryName
+     * @throws \Exception
+     * Открывает страницу редактирования страны
+     */
+    public function editCountry(string $countryName)
+    {
+        $this->tester->waitForElementVisible($countryName);
+        $this->tester->click($countryName);
     }
 
 }
