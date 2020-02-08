@@ -15,6 +15,14 @@ class CatalogPage
     /** @var string Кнопка добавления нового товара */
     public const ADD_NEW_PRODUCT_BUTTON = '//a[@class="button" and contains(text(),"Add New Product")]';
 
+    public const PRODUCT_CATEGORY_LINKS = [
+        'RubberDuck' => '//td//a[text()="Rubber Ducks"]'
+    ];
+
+    public const PRODUCTS_LINK = [
+        'BlueDuck' => '//td//a[text()="Blue Duck"]'
+    ];
+
     /** @var AcceptanceTester */
     protected $tester;
 
@@ -24,9 +32,8 @@ class CatalogPage
     /**
      * CatalogPage constructor.
      * @param AcceptanceTester $tester
-     * @param AddNewProductPage $addNewProductPage
      */
-    public function __construct(AcceptanceTester $tester, AddNewProductPage $addNewProductPage)
+    public function __construct(AcceptanceTester $tester)
     {
         $this->tester = $tester;
         $this->addNewProductPage = new AddNewProductPage($tester);
@@ -42,6 +49,18 @@ class CatalogPage
     public function getProductList()
     {
         return $this->tester->grabMultiple('//*[@class="row"]');
+    }
+
+    public function openProductCategory($category)
+    {
+        $this->tester->waitForElementVisible($category);
+        $this->tester->click($category);
+    }
+
+    public function openProduct($product)
+    {
+        $this->tester->waitForElementVisible($product);
+        $this->tester->click($product);
     }
 
 }
