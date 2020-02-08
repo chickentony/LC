@@ -7,7 +7,7 @@ use AcceptanceTester;
 class CountryPage
 {
     /** @var int Число ссылок на странице */
-    private int $numberOfLinks;
+    private $numberOfLinks;
 
     /** @var string Кнопка возврата назад на страницу со списком всех стран */
     public const CANCEL_BUTTON = '//*[@name="cancel"]';
@@ -22,7 +22,7 @@ class CountryPage
     public const EXTERNAL_LINK = '//i[@class="fa fa-external-link"]';
 
     /** @var AcceptanceTester */
-    protected AcceptanceTester $tester;
+    protected $tester;
 
     /**
      * CountryPage constructor.
@@ -60,7 +60,10 @@ class CountryPage
         return sprintf(self::EXTERNAL_LINK_FORMAT, $linkNumber);
     }
 
-    /** Получает кол-во элементов на странице */
+    /**
+     * Получает кол-во элементов на странице
+     * @throws \Codeception\Exception\ModuleException
+     */
     private function getNumberOfLinksOnPage()
     {
         $this->numberOfLinks = $this->tester->getNumberOfElementsOnPage(self::EXTERNAL_LINK);
