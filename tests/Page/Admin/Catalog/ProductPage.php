@@ -2,21 +2,24 @@
 
 namespace Tests\Page\Admin\Catalog;
 
-use AcceptanceTester;
+use Exception;
 
-class ProductPage
+class ProductPage extends CatalogPage
 {
-
-    protected $tester;
-
-    public function __construct(AcceptanceTester $tester)
+    /**
+     * @param $productLinks
+     * @throws Exception
+     */
+    public function checkBrowserLog(array $productLinks)
     {
-        $this->tester = $tester;
+        $browserLogs = [];
+        foreach ($productLinks as $productLink) {
+            $this->openProduct($productLink);
+            $browserLogs = $this->tester->getBrowserLog();
+            if (!empty($browserLogs)) {
+                throw new Exception('There are js errors in browser log');
+            }
+            $this->tester->moveBack();
+        }
     }
-
-    public function getBrowserLog()
-    {
-        return $this->tester->getBrowserLog();
-    }
-
 }

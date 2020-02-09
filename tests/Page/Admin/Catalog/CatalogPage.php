@@ -15,10 +15,15 @@ class CatalogPage
     /** @var string Кнопка добавления нового товара */
     public const ADD_NEW_PRODUCT_BUTTON = '//a[@class="button" and contains(text(),"Add New Product")]';
 
+    /** @var array Ссылка на категорию продуктов */
     public const PRODUCT_CATEGORY_LINKS = [
         'RubberDuck' => '//td//a[text()="Rubber Ducks"]'
     ];
 
+    /** @var string Формат ссылки на продукт */
+    public const PRODUCT_LINK_FORMAT = '//td//a[text()="%s"]';
+
+    /** @var array Ссылки на продукты */
     public $productLinks;
 
     /** @var AcceptanceTester */
@@ -49,31 +54,40 @@ class CatalogPage
         return $this->tester->grabMultiple('//*[@class="row"]');
     }
 
+    /**
+     * @param $category
+     * @throws \Exception
+     * Откроывает категорию с продуктами
+     */
     public function openProductCategory($category)
     {
         $this->tester->waitForElementVisible($category);
         $this->tester->click($category);
     }
 
+    /**
+     * @param $product
+     * @throws \Exception
+     * Открывает страницу продукта
+     */
     public function openProduct($product)
     {
         $this->tester->waitForElementVisible($product);
         $this->tester->click($product);
     }
 
+    /**
+     * @param array $productName
+     * Записывает x-Path для ссылок на продукты
+     */
     public function setProductXPath(array $productName)
     {
-        $str = '//td//a[text()="%s"]';
         $result = [];
         $keys = [];
         foreach ($productName as $name) {
-//            $result[] = sprintf($str, $name);
             $keys[] = $name;
-            $result = array_fill_keys($keys, sprintf($str, $name));
+            $result = array_fill_keys($keys, sprintf(self::PRODUCT_LINK_FORMAT, $name));
         }
-
         $this->productLinks = $result;
-//        var_dump($result);
     }
-
 }

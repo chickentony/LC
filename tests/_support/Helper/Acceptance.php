@@ -116,6 +116,11 @@ class Acceptance extends \Codeception\Module
         return count($webDriver->_findElements($locator));
     }
 
+    /**
+     * @return array
+     * @throws \Codeception\Exception\ModuleException
+     * Получает сообщения из лога бразуера
+     */
     public function getBrowserLog()
     {
         /** @var \Codeception\Module\WebDriver $webDriver */

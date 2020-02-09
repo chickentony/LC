@@ -4,11 +4,17 @@ namespace Tests\acceptance\Admin\Catalog;
 
 use AcceptanceTester;
 use Tests\Page\Admin\Catalog\CatalogPage;
+use Tests\Page\Admin\Catalog\ProductPage;
 
 class CheckBrowserLogCest
 {
-    private $productName = ['Blue Duck', 'Green Duck'];
+    /** @var array Актуальный список продуктов */
+    private $productName = ['Blue Duck', 'Green Duck', 'Purple Duck', 'Red Duck', 'Yellow Duck'];
 
+    /**
+     * @param AcceptanceTester $I
+     * Логин в админку
+     */
     public function _before(AcceptanceTester $I)
     {
         $I->amOnPage('/admin');
@@ -21,25 +27,19 @@ class CheckBrowserLogCest
     /**
      * @param AcceptanceTester $I
      * @param CatalogPage $catalogPage
+     * @param ProductPage $productPage
      * @throws \Codeception\Exception\ModuleException
+     * @throws \Exception
+     * ToDo: ProductPage extend CatalogPage class, there are unnecessary injection of class
      */
-    public function checkBrowserLog(AcceptanceTester $I, CatalogPage $catalogPage)
+    public function checkBrowserLog(AcceptanceTester $I, CatalogPage $catalogPage, ProductPage $productPage)
     {
         $I->wantTo('Check browser log on product page.');
         $I->amOnPage($catalogPage::PAGE_URL);
         $I->waitTillPageLoad($catalogPage::PAGE_HEADER);
         $catalogPage->openProductCategory($catalogPage::PRODUCT_CATEGORY_LINKS['RubberDuck']);
         $catalogPage->setProductXPath($this->productName);
-//        var_dump($catalogPage->productLinks);
-        foreach ($catalogPage->productLinks as $link) {
-            $catalogPage->openProduct($link);
-            var_dump($I->getBrowserLog());
-            $I->moveBack();
-        }
-//        $catalogPage->openProduct($catalogPage::PRODUCTS_LINK['BlueDuck']);
-
-//        var_dump($browserLog);
-//        $I->wait(3);
+        $productPage->checkBrowserLog($catalogPage->productLinks);
     }
 
 }
