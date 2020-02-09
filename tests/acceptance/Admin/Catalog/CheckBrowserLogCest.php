@@ -7,6 +7,8 @@ use Tests\Page\Admin\Catalog\CatalogPage;
 
 class CheckBrowserLogCest
 {
+    private $productName = ['Blue Duck', 'Green Duck'];
+
     public function _before(AcceptanceTester $I)
     {
         $I->amOnPage('/admin');
@@ -27,9 +29,16 @@ class CheckBrowserLogCest
         $I->amOnPage($catalogPage::PAGE_URL);
         $I->waitTillPageLoad($catalogPage::PAGE_HEADER);
         $catalogPage->openProductCategory($catalogPage::PRODUCT_CATEGORY_LINKS['RubberDuck']);
-        $catalogPage->openProduct($catalogPage::PRODUCTS_LINK['BlueDuck']);
-        $browserLog = $I->getBrowserLog();
-        var_dump($browserLog);
+        $catalogPage->setProductXPath($this->productName);
+//        var_dump($catalogPage->productLinks);
+        foreach ($catalogPage->productLinks as $link) {
+            $catalogPage->openProduct($link);
+            var_dump($I->getBrowserLog());
+            $I->moveBack();
+        }
+//        $catalogPage->openProduct($catalogPage::PRODUCTS_LINK['BlueDuck']);
+
+//        var_dump($browserLog);
 //        $I->wait(3);
     }
 

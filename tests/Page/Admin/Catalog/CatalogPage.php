@@ -19,9 +19,7 @@ class CatalogPage
         'RubberDuck' => '//td//a[text()="Rubber Ducks"]'
     ];
 
-    public const PRODUCTS_LINK = [
-        'BlueDuck' => '//td//a[text()="Blue Duck"]'
-    ];
+    public $productLinks;
 
     /** @var AcceptanceTester */
     protected $tester;
@@ -61,6 +59,21 @@ class CatalogPage
     {
         $this->tester->waitForElementVisible($product);
         $this->tester->click($product);
+    }
+
+    public function setProductXPath(array $productName)
+    {
+        $str = '//td//a[text()="%s"]';
+        $result = [];
+        $keys = [];
+        foreach ($productName as $name) {
+//            $result[] = sprintf($str, $name);
+            $keys[] = $name;
+            $result = array_fill_keys($keys, sprintf($str, $name));
+        }
+
+        $this->productLinks = $result;
+//        var_dump($result);
     }
 
 }
