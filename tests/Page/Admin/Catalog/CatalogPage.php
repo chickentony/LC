@@ -55,39 +55,35 @@ class CatalogPage
     }
 
     /**
-     * @param $category
+     * @param string $category
      * @throws \Exception
-     * Откроывает категорию с продуктами
+     * Открывает категорию с продуктами
      */
-    public function openProductCategory($category)
+    public function openProductCategory(string $category)
     {
         $this->tester->waitForElementVisible($category);
         $this->tester->click($category);
     }
 
     /**
-     * @param $product
+     * @param string $product
      * @throws \Exception
      * Открывает страницу продукта
      */
-    public function openProduct($product)
+    public function openProduct(string $product)
     {
         $this->tester->waitForElementVisible($product);
         $this->tester->click($product);
     }
 
     /**
-     * @param array $productName
+     * @param string[] $productNames
      * Записывает x-Path для ссылок на продукты
      */
-    public function setProductXPath(array $productName)
+    public function setProductXPath(array $productNames)
     {
-        $result = [];
-        $keys = [];
-        foreach ($productName as $name) {
-            $keys[] = $name;
-            $result = array_fill_keys($keys, sprintf(self::PRODUCT_LINK_FORMAT, $name));
+        foreach ($productNames as $name) {
+            $this->productLinks = array_fill_keys($productNames, sprintf(self::PRODUCT_LINK_FORMAT, $name));
         }
-        $this->productLinks = $result;
     }
 }

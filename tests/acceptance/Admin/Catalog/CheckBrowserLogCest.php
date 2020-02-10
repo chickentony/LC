@@ -9,7 +9,7 @@ use Tests\Page\Admin\Catalog\ProductPage;
 class CheckBrowserLogCest
 {
     /** @var array Актуальный список продуктов */
-    private $productName = ['Blue Duck', 'Green Duck', 'Purple Duck', 'Red Duck', 'Yellow Duck'];
+    private $productNames = ['Blue Duck', 'Green Duck', 'Purple Duck', 'Red Duck', 'Yellow Duck'];
 
     /**
      * @param AcceptanceTester $I
@@ -32,14 +32,14 @@ class CheckBrowserLogCest
      * @throws \Exception
      * ToDo: ProductPage extend CatalogPage class, there are unnecessary injection of class
      */
-    public function checkBrowserLog(AcceptanceTester $I, CatalogPage $catalogPage, ProductPage $productPage)
+    public function checkBrowserLogOutput(AcceptanceTester $I, CatalogPage $catalogPage, ProductPage $productPage)
     {
-        $I->wantTo('Check browser log on product page.');
+        $I->wantTo('Check browser log output on product page.');
         $I->amOnPage($catalogPage::PAGE_URL);
         $I->waitTillPageLoad($catalogPage::PAGE_HEADER);
         $catalogPage->openProductCategory($catalogPage::PRODUCT_CATEGORY_LINKS['RubberDuck']);
-        $catalogPage->setProductXPath($this->productName);
-        $productPage->checkBrowserLog($catalogPage->productLinks);
+        $catalogPage->setProductXPath($this->productNames);
+        $productPage->checkBrowserLogForOutput($catalogPage->productLinks);
     }
 
 }
