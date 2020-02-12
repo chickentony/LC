@@ -83,7 +83,7 @@ class CatalogPage
     public function setProductXPath(array $productNames)
     {
         foreach ($productNames as $name) {
-            $this->productLinks = array_fill_keys($productNames, sprintf(self::PRODUCT_LINK_FORMAT, $name));
+            $this->productLinks[$name] = sprintf(self::PRODUCT_LINK_FORMAT, $name);
         }
     }
 }
