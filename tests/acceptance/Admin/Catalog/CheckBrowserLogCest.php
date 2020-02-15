@@ -14,14 +14,11 @@ class CheckBrowserLogCest
     /**
      * @param AcceptanceTester $I
      * Логин в админку
+     * @throws \Codeception\Exception\ModuleException
      */
     public function _before(AcceptanceTester $I)
     {
-        $I->amOnPage('/admin');
-        $I->fillField('//*[@name="username"]', 'admin');
-        $I->fillField('//*[@name="password"]', 'admin');
-        $I->click('//*[@name="login"]');
-        $I->see('You are now logged in as admin');
+        $I->login();
     }
 
     /**
