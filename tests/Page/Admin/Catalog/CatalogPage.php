@@ -15,6 +15,17 @@ class CatalogPage
     /** @var string Кнопка добавления нового товара */
     public const ADD_NEW_PRODUCT_BUTTON = '//a[@class="button" and contains(text(),"Add New Product")]';
 
+    /** @var array Ссылка на категорию продуктов */
+    public const PRODUCT_CATEGORY_LINKS = [
+        'RubberDuck' => '//td//a[text()="Rubber Ducks"]'
+    ];
+
+    /** @var string Формат ссылки на продукт */
+    public const PRODUCT_LINK_FORMAT = '//td//a[text()="%s"]';
+
+    /** @var array Ссылки на продукты */
+    public $productLinks;
+
     /** @var AcceptanceTester */
     protected $tester;
 
@@ -24,9 +35,8 @@ class CatalogPage
     /**
      * CatalogPage constructor.
      * @param AcceptanceTester $tester
-     * @param AddNewProductPage $addNewProductPage
      */
-    public function __construct(AcceptanceTester $tester, AddNewProductPage $addNewProductPage)
+    public function __construct(AcceptanceTester $tester)
     {
         $this->tester = $tester;
         $this->addNewProductPage = new AddNewProductPage($tester);
@@ -44,4 +54,36 @@ class CatalogPage
         return $this->tester->grabMultiple('//*[@class="row"]');
     }
 
+    /**
+     * @param string $category
+     * @throws \Exception
+     * Открывает категорию с продуктами
+     */
+    public function openProductCategory(string $category)
+    {
+        $this->tester->waitForElementVisible($category);
+        $this->tester->click($category);
+    }
+
+    /**
+     * @param string $product
+     * @throws \Exception
+     * Открывает страницу продукта
+     */
+    public function openProduct(string $product)
+    {
+        $this->tester->waitForElementVisible($product);
+        $this->tester->click($product);
+    }
+
+    /**
+     * @param string[] $productNames
+     * Записывает x-Path для ссылок на продукты
+     */
+    public function setProductXPath(array $productNames)
+    {
+        foreach ($productNames as $name) {
+            $this->productLinks[$name] = sprintf(self::PRODUCT_LINK_FORMAT, $name);
+        }
+    }
 }
