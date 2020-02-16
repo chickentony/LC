@@ -10,6 +10,7 @@ class GeoZonesCest
     /**
      * @param AcceptanceTester $I
      * @throws \Codeception\Exception\ModuleException
+     * Логин в админку
      */
     public function _before(AcceptanceTester $I)
     {
