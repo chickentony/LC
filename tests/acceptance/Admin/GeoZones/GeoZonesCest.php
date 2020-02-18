@@ -4,17 +4,17 @@ namespace Tests\acceptance\Admin\GeoZones;
 
 use AcceptanceTester;
 use Tests\Page\Admin\GeoZones\GeoZonesPage;
+use Step\Acceptance\Admin;
 
 class GeoZonesCest
 {
     /**
-     * @param AcceptanceTester $I
-     * @throws \Codeception\Exception\ModuleException
-     * Логин в админку
+     * @param Admin $admin
+     * Логин в даминку
      */
-    public function _before(AcceptanceTester $I)
+    public function _before(Admin $admin)
     {
-        $I->login();
+        $admin->loginAsAdmin();
     }
 
     /**

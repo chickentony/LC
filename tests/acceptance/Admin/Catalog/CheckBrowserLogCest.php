@@ -3,6 +3,7 @@
 namespace Tests\acceptance\Admin\Catalog;
 
 use AcceptanceTester;
+use Step\Acceptance\Admin;
 use Tests\Page\Admin\Catalog\CatalogPage;
 use Tests\Page\Admin\Catalog\ProductPage;
 
@@ -12,13 +13,12 @@ class CheckBrowserLogCest
     private $productNames = ['Blue Duck', 'Green Duck', 'Purple Duck', 'Red Duck', 'Yellow Duck'];
 
     /**
-     * @param AcceptanceTester $I
-     * Логин в админку
-     * @throws \Codeception\Exception\ModuleException
+     * @param Admin $admin
+     * Логин в даминку
      */
-    public function _before(AcceptanceTester $I)
+    public function _before(Admin $admin)
     {
-        $I->login();
+        $admin->loginAsAdmin();
     }
 
     /**

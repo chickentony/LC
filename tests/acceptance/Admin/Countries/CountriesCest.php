@@ -3,18 +3,18 @@
 namespace Tests\acceptance\Admin\Countries;
 
 use AcceptanceTester;
+use Step\Acceptance\Admin;
 use Tests\Page\Admin\Countries\CountriesPage;
 
 class CountriesCest
 {
     /**
-     * @param AcceptanceTester $I
-     * @throws \Codeception\Exception\ModuleException
-     * Логин в админку
+     * @param Admin $admin
+     * Логин в даминку
      */
-    public function _before(AcceptanceTester $I)
+    public function _before(Admin $admin)
     {
-        $I->login();
+        $admin->loginAsAdmin();
     }
 
     /**

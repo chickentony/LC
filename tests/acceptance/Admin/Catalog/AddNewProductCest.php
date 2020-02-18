@@ -3,18 +3,18 @@
 namespace Tests\acceptance\Admin\Catalog;
 
 use AcceptanceTester;
+use Step\Acceptance\Admin;
 use Tests\Page\Admin\Catalog\CatalogPage;
 
 class AddNewProductCest
 {
     /**
-     * @param AcceptanceTester $I
-     * @throws \Codeception\Exception\ModuleException
-     * Логин в админку
+     * @param Admin $admin
+     * Логин в даминку
      */
-    public function _before(AcceptanceTester $I)
+    public function _before(Admin $admin)
     {
-        $I->login();
+        $admin->loginAsAdmin();
     }
 
     /**
