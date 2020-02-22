@@ -4,16 +4,17 @@ namespace Tests\acceptance\Admin\GeoZones;
 
 use AcceptanceTester;
 use Tests\Page\Admin\GeoZones\GeoZonesPage;
+use Step\Acceptance\Admin;
 
 class GeoZonesCest
 {
-    public function _before(AcceptanceTester $I)
+    /**
+     * @param Admin $admin
+     * Логин в даминку
+     */
+    public function _before(Admin $admin)
     {
-        $I->amOnPage('/admin');
-        $I->fillField('//*[@name="username"]', 'admin');
-        $I->fillField('//*[@name="password"]', 'admin');
-        $I->click('//*[@name="login"]');
-        $I->see('You are now logged in as admin');
+        $admin->loginAsAdmin();
     }
 
     /**
