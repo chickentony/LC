@@ -2,9 +2,13 @@
     "autoload": {
         "psr-4": {
             "Tests\\": "tests/"
-        }
+        },
+        "files": [
+            "includes/env.php"
+        ]
     },
     "require": {
-        "codeception/codeception": "^3.1"
+        "codeception/codeception": "^3.1",
+        "vlucas/phpdotenv": "^4.1"
     }
 }

@@ -17,6 +17,7 @@ class ComposerStaticInit33ee5dd243d9b4990a6b8eeb21b643f4
         'c964ee0ededf28c96ebd9db5099ef910' => __DIR__ . '/..' . '/guzzlehttp/promises/src/functions_include.php',
         '37a3dc5111fe8f707ab4c132ef1dbc62' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/functions_include.php',
         '6124b4c8570aa390c21fafd04a26c69f' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
+        '5107c54370e172156f99218ec5b6a950' => __DIR__ . '/../..' . '/includes/env.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -53,6 +54,7 @@ class ComposerStaticInit33ee5dd243d9b4990a6b8eeb21b643f4
             'Psr\\Http\\Message\\' => 17,
             'Psr\\Container\\' => 14,
             'Prophecy\\' => 9,
+            'PhpOption\\' => 10,
         ),
         'H' => 
         array (
@@ -78,6 +80,7 @@ class ComposerStaticInit33ee5dd243d9b4990a6b8eeb21b643f4
         ),
         'D' => 
         array (
+            'Dotenv\\' => 7,
             'Doctrine\\Instantiator\\' => 22,
             'DeepCopy\\' => 9,
         ),
@@ -168,6 +171,10 @@ class ComposerStaticInit33ee5dd243d9b4990a6b8eeb21b643f4
         array (
             0 => __DIR__ . '/..' . '/phpspec/prophecy/src/Prophecy',
         ),
+        'PhpOption\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/phpoption/phpoption/src/PhpOption',
+        ),
         'Hoa\\Ustring\\' => 
         array (
             0 => __DIR__ . '/..' . '/hoa/ustring',
@@ -219,6 +226,10 @@ class ComposerStaticInit33ee5dd243d9b4990a6b8eeb21b643f4
         'Facebook\\WebDriver\\' => 
         array (
             0 => __DIR__ . '/..' . '/facebook/webdriver/lib',
+        ),
+        'Dotenv\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/vlucas/phpdotenv/src',
         ),
         'Doctrine\\Instantiator\\' => 
         array (

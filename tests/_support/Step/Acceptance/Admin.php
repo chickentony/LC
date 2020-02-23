@@ -13,8 +13,8 @@ class Admin extends AcceptanceTester
         $authorizationWindow = new AuthorizationWindow();
         $this->amOnPage($authorizationWindow::PAGE_URL);
         try {
-            $this->fillField($authorizationWindow::USERNAME_INPUT, $authorizationWindow::USERS['adminLogin']);
-            $this->fillField($authorizationWindow::PASSWORD_INPUT, $authorizationWindow::USERS['adminPassword']);
+            $this->fillField($authorizationWindow::USERNAME_INPUT, getenv('ADMIN_LOGIN'));
+            $this->fillField($authorizationWindow::PASSWORD_INPUT, getenv('ADMIN_PASSWORD'));
             $this->click($authorizationWindow::LOGIN_BUTTON);
         } catch (WebDriverException $e) {
             $e->getMessage();
