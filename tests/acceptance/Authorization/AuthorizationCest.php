@@ -3,6 +3,7 @@
 namespace Tests\acceptance\Authorization;
 
 use AcceptanceTester;
+use Codeception\Example;
 use Tests\Page\Main\MainPage;
 
 class AuthorizationCest
@@ -24,16 +25,38 @@ class AuthorizationCest
     /**
      * @param AcceptanceTester $I
      * @param MainPage $mainPage
+     * @param Example $example
      * @throws \Codeception\Exception\ModuleException
-     * ToDo: use dataProvider, do one test
+     * @dataProvider wrongLoginParamsDataProvider
      */
-    public function authorizationWithIncorrectPassword(AcceptanceTester $I, MainPage $mainPage)
+    public function authorizationWithWrongParams(AcceptanceTester $I, MainPage $mainPage, Example $example)
     {
-        $I->wantTo('Check login with wrong password should not login user');
+        $I->wantTo('Check login with wrong params should not login user');
         $I->amOnPage($mainPage::MAIN_PAGE_URL);
         $I->waitTillPageLoad($mainPage::LOGO_DIV);
-        $mainPage->login(getenv('USER_EMAIL'), '12345');
+        $mainPage->login($example['login'], $example['password']);
         $I->see('Wrong password or the account is disabled, or does not exist');
+    }
+
+    /**
+     * @return array
+     */
+    private function wrongLoginParamsDataProvider()
+    {
+        return [
+            'wrongPassword' => [
+                'login' => getenv('USER_EMAIL'),
+                'password' => 12345
+            ],
+            'wrongLogin' => [
+                'login' => 'some_string',
+                'password' => getenv('USER_PASSWORD')
+            ],
+            'notRegistratedUser' => [
+                'login' => 'user1@test.ru',
+                'password' => 12345
+            ]
+        ];
     }
 
     /**
