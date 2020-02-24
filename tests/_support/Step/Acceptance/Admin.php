@@ -10,7 +10,7 @@ class Admin extends AcceptanceTester
 {
     public function loginAsAdmin()
     {
-        $authorizationWindow = new AuthorizationWindow();
+        $authorizationWindow = new AuthorizationWindow($this);
         $this->amOnPage($authorizationWindow::PAGE_URL);
         try {
             $this->fillField($authorizationWindow::USERNAME_INPUT, getenv('ADMIN_LOGIN'));
