@@ -119,5 +119,8 @@
   
 // Password Encryption Salt
   define('PASSWORD_SALT', 'rJONvAhIq4qUfjLDeCTR7libydHp09surO6GCljAE5eziDPrQkGTbjxj4jAq0wTm1wmC9YQoWwSFNscAggN4pId69SE71wdX5U8p173YYWcKvZSnhtJedidK4lH8jVoh');
+
+  // Vendor
+  define('DIR_VENDOR', __DIR__ . '/../vendor/');
   
 ?>
