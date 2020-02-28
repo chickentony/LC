@@ -32,7 +32,7 @@ class AuthorizationCest
         $I->wantTo('Check login with wrong password should not login user');
         $I->amOnPage($mainPage::MAIN_PAGE_URL);
         $I->waitTillPageLoad($mainPage::LOGO_DIV);
-        $mainPage->login(getenv('USER_EMAIL'), '12345');
+        $mainPage->login(getenv('USER_EMAIL'), '11111');
         $I->see('Wrong password or the account is disabled, or does not exist');
     }
 

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Step\Acceptance;
 
 use AcceptanceTester;
@@ -8,13 +10,16 @@ use Tests\Page\Admin\AuthorizationWindow;
 
 class Admin extends AcceptanceTester
 {
-    public function loginAsAdmin()
+    /** Логинется в админку под админом */
+    public function loginAsAdmin(): void
     {
         $authorizationWindow = new AuthorizationWindow();
+        $login = getenv('ADMIN_LOGIN');
+        $password = getenv('ADMIN_PASSWORD');
         $this->amOnPage($authorizationWindow::PAGE_URL);
         try {
-            $this->fillField($authorizationWindow::USERNAME_INPUT, getenv('ADMIN_LOGIN'));
-            $this->fillField($authorizationWindow::PASSWORD_INPUT, getenv('ADMIN_PASSWORD'));
+            $this->fillField($authorizationWindow::USERNAME_INPUT, $login);
+            $this->fillField($authorizationWindow::PASSWORD_INPUT, $password);
             $this->click($authorizationWindow::LOGIN_BUTTON);
         } catch (WebDriverException $e) {
             $e->getMessage();
