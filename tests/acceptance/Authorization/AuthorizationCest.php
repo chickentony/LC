@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\acceptance\Authorization;
 
 use AcceptanceTester;
@@ -13,12 +15,15 @@ class AuthorizationCest
      * @param MainPage $mainPage
      * @throws \Exception
      */
-    public function successAuthorization(AcceptanceTester $I, MainPage $mainPage)
+    public function successAuthorization(AcceptanceTester $I, MainPage $mainPage): void
     {
+        $login = getenv('USER_EMAIL');
+        $password = getenv('USER_PASSWORD');
+
         $I->wantTo('Check success authorization');
         $I->amOnPage($mainPage::MAIN_PAGE_URL);
         $I->waitTillPageLoad($mainPage::LOGO_DIV);
-        $mainPage->login(getenv('USER_EMAIL'), getenv('USER_PASSWORD'));
+        $mainPage->login($login, $password);
         $I->see('You are now logged in as Антон Миролюбов.');
     }
 
@@ -29,7 +34,7 @@ class AuthorizationCest
      * @throws \Codeception\Exception\ModuleException
      * @dataProvider wrongLoginParamsDataProvider
      */
-    public function authorizationWithWrongParams(AcceptanceTester $I, MainPage $mainPage, Example $example)
+    public function authorizationWithWrongParams(AcceptanceTester $I, MainPage $mainPage, Example $example): void
     {
         $I->wantTo('Check login with wrong params should not login user');
         $I->amOnPage($mainPage::MAIN_PAGE_URL);
@@ -41,12 +46,12 @@ class AuthorizationCest
     /**
      * @return array
      */
-    private function wrongLoginParamsDataProvider()
+    private function wrongLoginParamsDataProvider(): array
     {
         return [
             'wrongPassword' => [
                 'login' => getenv('USER_EMAIL'),
-                'password' => 12345
+                'password' => 123
             ],
             'wrongLogin' => [
                 'login' => 'some_string',
@@ -64,7 +69,7 @@ class AuthorizationCest
      * @param MainPage $mainPage
      * @throws \Codeception\Exception\ModuleException
      */
-    public function authorizationWithoutPassword(AcceptanceTester $I, MainPage $mainPage)
+    public function authorizationWithoutPassword(AcceptanceTester $I, MainPage $mainPage): void
     {
         $I->wantTo('Check login without password should not login user');
         $I->amOnPage($mainPage::MAIN_PAGE_URL);
