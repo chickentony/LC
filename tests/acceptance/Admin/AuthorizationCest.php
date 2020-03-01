@@ -12,7 +12,6 @@ class AuthorizationCest
     /**
      * @param AcceptanceTester $I
      * @param AuthorizationWindow $authorizationWindow
-     * @throws \Codeception\Exception\ModuleException
      * @throws \Exception
      */
     public function successAuthorization(AcceptanceTester $I, AuthorizationWindow $authorizationWindow): void
