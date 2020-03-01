@@ -14,6 +14,12 @@
  */
 
   require_once('includes/app_header.inc.php');
+  if (file_exists(DIR_VENDOR . 'autoload.php')) {
+      require_once(DIR_VENDOR . 'autoload.php');
+  } else {
+      echo 'Run composer install command to create vendor directory';
+  }
+  require_once(__DIR__ . '/includes/env.php');
 
   if (settings::get('maintenance_mode')) {
     if (!empty(user::$data['id'])) {

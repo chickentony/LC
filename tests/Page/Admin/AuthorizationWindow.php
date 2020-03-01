@@ -11,9 +11,4 @@ class AuthorizationWindow
     public const PASSWORD_INPUT = '//*[@name="password"]';
 
     public const LOGIN_BUTTON = '//*[@name="login"]';
-
-    public const USERS = [
-        'adminLogin' => 'admin',
-        'adminPassword' => 'admin'
-    ];
 }
