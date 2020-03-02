@@ -6,15 +6,21 @@ namespace Tests\acceptance\Admin;
 
 use AcceptanceTester;
 use Tests\Page\Admin\AuthorizationWindow;
+use Tests\Page\Admin\Main\MainPage;
 
 class AuthorizationCest
 {
     /**
      * @param AcceptanceTester $I
      * @param AuthorizationWindow $authorizationWindow
+     * @param MainPage $mainPage
      * @throws \Exception
      */
-    public function successAuthorization(AcceptanceTester $I, AuthorizationWindow $authorizationWindow): void
+    public function successAuthorization(
+        AcceptanceTester $I,
+        AuthorizationWindow $authorizationWindow,
+        MainPage $mainPage
+    ): void
     {
         $login = getenv('ADMIN_LOGIN');
         $password = getenv('ADMIN_PASSWORD');
@@ -23,6 +29,7 @@ class AuthorizationCest
         $I->amOnPage($authorizationWindow::PAGE_URL);
         $authorizationWindow->login($login, $password);
         $I->see('You are now logged in as admin');
+        $I->seeElement($mainPage::LOGOUT_BUTTON);
     }
 
     /**
