@@ -13,7 +13,7 @@ class Admin extends AcceptanceTester
     /** Логинется в админку под админом */
     public function loginAsAdmin(): void
     {
-        $authorizationWindow = new AuthorizationWindow();
+        $authorizationWindow = new AuthorizationWindow($this);
         $login = getenv('ADMIN_LOGIN');
         $password = getenv('ADMIN_PASSWORD');
         $this->amOnPage($authorizationWindow::PAGE_URL);

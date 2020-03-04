@@ -15,6 +15,5 @@ modules:
 #            capabilities:
 #               "goog:chromeOptions":
         - \Helper\Acceptance
-        - \Helper\LoginIntoAdminPanelHelper
         - Asserts
     step_decorators: ~        
