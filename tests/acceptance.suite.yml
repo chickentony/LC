@@ -16,4 +16,11 @@ modules:
 #               "goog:chromeOptions":
         - \Helper\Acceptance
         - Asserts
+        - \Helper\Dbhelper
+        - Db:
+            dsn: 'mysql:host=127.0.0.1;port=3306;dbname=litecart2;charset=utf8'
+            user: 'root'
+            password: ''
+    params:
+      - .env
     step_decorators: ~        

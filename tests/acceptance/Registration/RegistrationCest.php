@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\acceptance\Registration;
 
 use AcceptanceTester;
@@ -16,7 +18,7 @@ class RegistrationCest
      * @throws \Codeception\Exception\ModuleException
      * @throws \Exception
      */
-    public function newUserRegistration(AcceptanceTester $I, MainPage $mainPage)
+    public function newUserRegistration(AcceptanceTester $I, MainPage $mainPage): void
     {
         $I->amOnPage($mainPage::MAIN_PAGE_URL);
         $I->waitTillPageLoad($mainPage::LOGO_DIV);
@@ -30,6 +32,11 @@ class RegistrationCest
         $I->see('You are now logged in as Фредд Дерст.');
         $mainPage->logout();
         $I->see($this->logoutMessage);
+//        var_dump($I->grabFromDatabase('lc_customers', 'id', ['firstname' => 'Фредд']));
     }
 
+    public function _after(AcceptanceTester $I, MainPage $mainPage): void
+    {
+        $I->deleteRecordFromTable('lc_customers', ['firstname' => 'Фредд']);
+    }
 }
