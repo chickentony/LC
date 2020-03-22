@@ -12,6 +12,9 @@ class RegistrationCest
     /** @var string Сообщение при выходе из акаунта */
     private $logoutMessage = 'You are now logged out.';
 
+    /** @var string Название таблицы в базе данных */
+    private $dbTableName = 'lc_customers';
+
     /**
      * @param AcceptanceTester $I
      * @param MainPage $mainPage
@@ -32,11 +35,19 @@ class RegistrationCest
         $I->see('You are now logged in as Фредд Дерст.');
         $mainPage->logout();
         $I->see($this->logoutMessage);
-//        var_dump($I->grabFromDatabase('lc_customers', 'id', ['firstname' => 'Фредд']));
     }
 
+    /**
+     * @param AcceptanceTester $I
+     * @param MainPage $mainPage
+     * @throws \Codeception\Exception\ModuleException
+     * Удаляет созданного пользователя из базы после теста
+     */
     public function _after(AcceptanceTester $I, MainPage $mainPage): void
     {
-        $I->deleteRecordFromTable('lc_customers', ['firstname' => 'Фредд']);
+        $I->deleteRecordFromTable($this->dbTableName, [
+            'firstname' => $mainPage->registrationPage::NEW_USER['NAME'],
+            'lastname' => $mainPage->registrationPage::NEW_USER['LAST_NAME']
+        ]);
     }
 }

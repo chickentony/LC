@@ -13,9 +13,10 @@ class RegistrationPage
         'a', 'b', 'c', 'd', 'e', 'f', 'j', 'h', 'i', 'g', 'k', 'l', 'm', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w'
     ];
 
+    /** @var array Массив с информацией о новом пользователе */
     public const NEW_USER = [
-        'name' => 'Фредд',
-        'lastName' => 'Дерст'
+        'NAME' => 'Фредд',
+        'LAST_NAME' => 'Дерст'
     ];
 
     /** @var string Строука с почтой */
@@ -53,8 +54,8 @@ class RegistrationPage
      */
     public function newCustomerRegistration(): void
     {
-        $this->tester->fillField(self::REQUIRED_CUSTOMER_INFO_FIELDS['FIRST_NAME_INPUT'], self::NEW_USER['name']);
-        $this->tester->fillField(self::REQUIRED_CUSTOMER_INFO_FIELDS['LAST_NAME_INPUT'], self::NEW_USER['lastName']);
+        $this->tester->fillField(self::REQUIRED_CUSTOMER_INFO_FIELDS['FIRST_NAME_INPUT'], self::NEW_USER['NAME']);
+        $this->tester->fillField(self::REQUIRED_CUSTOMER_INFO_FIELDS['LAST_NAME_INPUT'], self::NEW_USER['LAST_NAME']);
         $this->tester->fillField(self::REQUIRED_CUSTOMER_INFO_FIELDS['FIRST_ADDRESS_INPUT'], 'Джексонвилл, Техас');
         $this->tester->fillField(self::REQUIRED_CUSTOMER_INFO_FIELDS['POST_CODE_INPUT'], '127425');
         $this->tester->fillField(self::REQUIRED_CUSTOMER_INFO_FIELDS['CITY_INPUT'], 'Техас');
@@ -73,7 +74,7 @@ class RegistrationPage
      * Задаем email пользователя
      * @throws \Exception
      */
-    private function setEmail($letters, $num = 1)
+    private function setEmail($letters, $num = 1): void
     {
         shuffle($letters);
         $result = [];

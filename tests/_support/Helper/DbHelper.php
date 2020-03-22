@@ -31,21 +31,10 @@ class DbHelper extends Module
      * @param array $params
      * @throws \Codeception\Exception\ModuleException
      */
-    public function deleteRecordFromTable($table, $params): void
+    public function deleteRecordFromTable(string $table, array $params): void
     {
         /** @var \Codeception\Lib\Driver\Db $db */
         $db = $this->getDbDriver();
-//        $sql = "DELETE from lc_customers where firstname = 'Фредд'";
-//        $db->executeQuery($sql);
         $db->deleteQueryByCriteria($table, $params);
     }
-
-//    public function getDbDataTest($params)
-//    {
-//        /** @var \Codeception\Lib\Driver\Db $db */
-//        $db = $this->getDbDriver();
-//        $db->load(['SELECT * from lc_customers']);
-////        $db->select('firstname', 'lc_customers', $params);
-//    }
-
 }
