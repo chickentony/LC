@@ -16,4 +16,9 @@ modules:
 #               "goog:chromeOptions":
         - \Helper\Acceptance
         - Asserts
+        - \Helper\DbHelper
+        - Db:
+            dsn: "mysql:host=%DB_HOST%;port=%DB_PORT%;dbname=%DB_NAME%;charset=utf8"
+            user: "%DB_USER%"
+            password: ''
     step_decorators: ~        
