@@ -23,9 +23,6 @@ class CatalogPage
     /** @var string Формат ссылки на продукт */
     public const PRODUCT_LINK_FORMAT = '//td//a[text()="%s"]';
 
-    /** @var array Ссылки на продукты */
-    public $productLinks;
-
     /** @var AcceptanceTester */
     protected $tester;
 
@@ -43,13 +40,13 @@ class CatalogPage
     }
 
     /** Нажимает кнопку доабвления нового товара */
-    public function clickOnAddNewProductButton()
+    public function clickOnAddNewProductButton(): void
     {
         $this->tester->click(self::ADD_NEW_PRODUCT_BUTTON);
     }
 
     /** Получает список всех товаров и каталогов товаров */
-    public function getProductList()
+    public function getProductList(): array
     {
         return $this->tester->grabMultiple('//*[@class="row"]');
     }
@@ -59,7 +56,7 @@ class CatalogPage
      * @throws \Exception
      * Открывает категорию с продуктами
      */
-    public function openProductCategory(string $category)
+    public function openProductCategory(string $category): void
     {
         $this->tester->waitForElementVisible($category);
         $this->tester->click($category);
@@ -70,20 +67,9 @@ class CatalogPage
      * @throws \Exception
      * Открывает страницу продукта
      */
-    public function openProduct(string $product)
+    public function openProduct(string $product): void
     {
         $this->tester->waitForElementVisible($product);
         $this->tester->click($product);
-    }
-
-    /**
-     * @param string[] $productNames
-     * Записывает x-Path для ссылок на продукты
-     */
-    public function setProductXPath(array $productNames)
-    {
-        foreach ($productNames as $name) {
-            $this->productLinks[$name] = sprintf(self::PRODUCT_LINK_FORMAT, $name);
-        }
     }
 }

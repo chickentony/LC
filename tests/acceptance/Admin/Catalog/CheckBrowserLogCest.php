@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\acceptance\Admin\Catalog;
 
 use AcceptanceTester;
@@ -27,16 +29,14 @@ class CheckBrowserLogCest
      * @param ProductPage $productPage
      * @throws \Codeception\Exception\ModuleException
      * @throws \Exception
-     * ToDo: ProductPage extend CatalogPage class, there are unnecessary injection of class
      */
-    public function checkBrowserLogOutput(AcceptanceTester $I, CatalogPage $catalogPage, ProductPage $productPage)
+    public function checkBrowserLogOutput(AcceptanceTester $I, CatalogPage $catalogPage, ProductPage $productPage): void
     {
         $I->wantTo('Check browser log output on product page.');
         $I->amOnPage($catalogPage::PAGE_URL);
         $I->waitTillPageLoad($catalogPage::PAGE_HEADER);
         $catalogPage->openProductCategory($catalogPage::PRODUCT_CATEGORY_LINKS['RubberDuck']);
-        $catalogPage->setProductXPath($this->productNames);
-        $productPage->checkBrowserLogForOutput($catalogPage->productLinks);
+        $productPage->checkBrowserLogForOutput($this->productNames);
     }
 
 }

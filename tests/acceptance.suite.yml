@@ -11,6 +11,7 @@ modules:
             url: 'http://localhost/LiteCart'
             browser: chrome
             restart: true
+            clear_cookies: true
             window_size: 'maximize'
 #            capabilities:
 #               "goog:chromeOptions":
