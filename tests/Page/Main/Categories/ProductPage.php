@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Page\Main\Categories;
 
 use AcceptanceTester;
@@ -28,10 +30,10 @@ class ProductPage
      * @throws \Codeception\Exception\ModuleException
      * Добавляет товар в корзину
      */
-    public function clickOnAddProductToCartButton()
+    public function clickOnAddProductToCartButton(): void
     {
         $this->tester->click(self::ADD_PRODUCT_TO_CART_BUTTON);
-        // ToDO: think about wait(2)
+        // При добавлении товара в корзину нет никакой анимации, иногда ничего не остается, кроме wait
         $this->tester->wait(2);
         $this->tester->closePopup('Error');
         $this->tester->reloadPage();
@@ -40,18 +42,20 @@ class ProductPage
     /**
      * @param int $iterator
      * @param string $itemsCountXPath
+     * @throws \Exception
+     * ToDo: общик exception для подобного рода проверок
      */
-    public function checkItemsCountInCart(int $iterator, string $itemsCountXPath)
+    public function checkItemsCountInCart(int $iterator, string $itemsCountXPath): void
     {
         $count = (int)$this->tester->grabTextFrom($itemsCountXPath);
-        //ToDO: assert need to be moved in test
-        $this->tester->assertEquals($count, $iterator);
+        if ($count !== $iterator) {
+            throw new \Exception('Number of adding items and items in cart are not same');
+        }
     }
 
     /** Кликает на иконку "Домой"*/
-    public function clickOnHomeIcon()
+    public function clickOnHomeIcon(): void
     {
         $this->tester->click(self::HOME_ICON);
     }
-
 }

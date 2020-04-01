@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Acceptance\ShoppingCart;
 
 use AcceptanceTester;
@@ -13,7 +15,7 @@ class ShoppingCartCest
      * @throws \Codeception\Exception\ModuleException
      * @throws \Exception
      */
-    public function addProductToCart(AcceptanceTester $I, MainPage $mainPage)
+    public function addProductToCart(AcceptanceTester $I, MainPage $mainPage): void
     {
         $I->amOnPage($mainPage::MAIN_PAGE_URL);
         $I->waitTillPageLoad($mainPage::LOGO_DIV);
