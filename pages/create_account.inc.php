@@ -20,7 +20,7 @@
     notices::add('errors', language::translate('error_already_logged_in', 'You are already logged in'));
   }
 
-  if (getenv('CAPTCHA_ENABLED') === 'false') {
+  if (booleanEnvVariable(getenv('CAPTCHA_ENABLED')) === false) {
       settings::set('captcha_enabled', '0');
   }
 

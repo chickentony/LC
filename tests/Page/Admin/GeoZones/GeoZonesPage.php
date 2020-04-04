@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Page\Admin\GeoZones;
 
 use AcceptanceTester;
@@ -35,11 +37,14 @@ class GeoZonesPage
     /**
      * @throws \Codeception\Exception\ModuleException
      */
-    public function openGeoZonePageAndCheckSort()
+    public function openGeoZonePageAndCheckSort(): void
     {
         foreach ($this->grabActualGeoZones() as $value) {
             $this->tester->click($value);
-            //ToDo: Сделать проверку на страницу без геозон
+            if (empty($this->grabZones())) {
+                $this->tester->click(self::CANCEL_BUTTON);
+                continue;
+            }
             $this->checkGeoZonesSort();
             $this->tester->click(self::CANCEL_BUTTON);
         }
@@ -49,15 +54,14 @@ class GeoZonesPage
      * @return string[]
      * Получает все выбранные элементы из выпадающих списков и оставляет только нужные нам
      */
-    private function grabZones()
+    private function grabZones(): array
     {
         //Забираем все выбранные значения из выпадающих списков
         $geoZonesTitles = $this->tester->grabMultiple(self::SELECTED_ITEM_IN_DROPDOWN);
-        // Убираем лишние поля из массива с заголовками
-        //ToDo: добавить нормальное название переменных для услвоия
-        foreach ($geoZonesTitles as $key => $value) {
-            if ($key % 2 === 0) {
-                unset($geoZonesTitles[$key]);
+        // Убираем поля с названием страны из массива с названиями геозон
+        foreach ($geoZonesTitles as $countryName => $geoZoneName) {
+            if ($countryName % 2 === 0) {
+                unset($geoZonesTitles[$countryName]);
             }
         }
         return $geoZonesTitles;
@@ -67,16 +71,15 @@ class GeoZonesPage
      * @throws \Codeception\Exception\ModuleException
      * Проверяет сортировку геозон
      */
-    private function checkGeoZonesSort()
+    private function checkGeoZonesSort(): void
     {
         $zones = $this->grabZones();
         $this->tester->checkSort($zones);
     }
 
     /** Возвращаем массив с геозонами */
-    private function grabActualGeoZones()
+    private function grabActualGeoZones(): array
     {
         return $this->tester->grabMultiple(self::GEO_ZONE_NAME_FROM_TABLES);
     }
-
 }
