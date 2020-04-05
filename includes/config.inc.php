@@ -130,10 +130,9 @@
           switch ($value) {
               case 'true':
                   return true;
-                  break;
               case 'false':
+              default:
                   return false;
-                  break;
           }
       }
   }
