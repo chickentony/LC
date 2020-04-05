@@ -129,13 +129,12 @@
       {
           switch ($value) {
               case 'true':
-                  $value = true;
+                  return true;
                   break;
               case 'false':
-                  $value = false;
+                  return false;
                   break;
           }
-          return $value;
       }
   }
   

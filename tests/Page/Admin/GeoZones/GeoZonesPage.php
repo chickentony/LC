@@ -59,9 +59,9 @@ class GeoZonesPage
         //Забираем все выбранные значения из выпадающих списков
         $geoZonesTitles = $this->tester->grabMultiple(self::SELECTED_ITEM_IN_DROPDOWN);
         // Убираем поля с названием страны из массива с названиями геозон
-        foreach ($geoZonesTitles as $countryName => $geoZoneName) {
-            if ($countryName % 2 === 0) {
-                unset($geoZonesTitles[$countryName]);
+        foreach ($geoZonesTitles as $geoZoneNumber => $geoZoneName) {
+            if ($geoZoneNumber % 2 === 0) {
+                unset($geoZonesTitles[$geoZoneNumber]);
             }
         }
         return $geoZonesTitles;
