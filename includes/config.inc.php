@@ -122,5 +122,19 @@
 
   // Vendor
   define('DIR_VENDOR', __DIR__ . '/../vendor/');
+
+  // Custom boolean env support
+  if (!function_exists('booleanEnvVariable')) {
+      function booleanEnvVariable($value)
+      {
+          switch ($value) {
+              case 'true':
+                  return true;
+              case 'false':
+              default:
+                  return false;
+          }
+      }
+  }
   
 ?>

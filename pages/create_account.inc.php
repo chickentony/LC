@@ -20,6 +20,10 @@
     notices::add('errors', language::translate('error_already_logged_in', 'You are already logged in'));
   }
 
+  if (booleanEnvVariable(getenv('CAPTCHA_ENABLED')) === false) {
+      settings::set('captcha_enabled', '0');
+  }
+
   if (!empty($_POST['create_account'])) {
 
     if (settings::get('captcha_enabled')) {
