@@ -14,8 +14,10 @@ class MainPage
     public const LOGOTYPE_IMG = '//img[@title="My Store"]';
 
     public const LEFT_MENU_ITEMS_HREF = '//ul[@id="box-apps-menu"]//li//a';
-    
+
     public const LEFT_MENU_SUB_ITEMS_HREF = '//ul[@id="box-apps-menu"]//li//ul//li/a';
+
+    public const PAGE_TITLE = '//h1';
 
     protected $tester;
 
@@ -34,17 +36,34 @@ class MainPage
         return $this->tester->grabMultiple(self::LEFT_MENU_SUB_ITEMS_HREF);
     }
 
-    public function openItemsAndSubItemsAndCheckHeaders()
+    public function checkTitleExistOnPage(): bool
+    {
+        $title = $this->tester->grabTextFrom(self::PAGE_TITLE);
+        return !(strlen($title) === '');
+    }
+
+    /**
+     * @throws \Exception
+     * Исключить клик по первому элементу в подэлементах
+     */
+    public function openItemsAndSubItemsAndCheckThatPagesHasTitles(): bool
     {
         $items = $this->getAllMenuItems();
         foreach ($items as $item) {
             $this->tester->click($item);
-            if (!empty($this->getAllMenuSubItems())) {
-                $subItems = $this->getAllMenuSubItems();
+            if ($this->checkTitleExistOnPage() === false) {
+                return false;
+            }
+            $subItems = $this->getAllMenuSubItems();
+            if (!empty($subItems)) {
                 foreach ($subItems as $subItem) {
                     $this->tester->click($subItem);
+                    if ($this->checkTitleExistOnPage() === false) {
+                        return false;
+                    }
                 }
             }
         }
+        return true;
     }
 }

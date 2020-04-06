@@ -15,10 +15,15 @@ class LeftMenuCest
         $admin->loginAsAdmin();
     }
 
+    /**
+     * @param AcceptanceTester $I
+     * @param MainPage $mainPage
+     * @throws \Codeception\Exception\ModuleException
+     */
     public function leftMenuItems(AcceptanceTester $I, MainPage $mainPage): void
     {
         $I->waitTillPageLoad($mainPage::LOGOTYPE_IMG);
-        $mainPage->openItemsAndSubItemsAndCheckHeaders();
+        $I->assertTrue($mainPage->openItemsAndSubItemsAndCheckThatPagesHasTitles());
     }
 
 }
