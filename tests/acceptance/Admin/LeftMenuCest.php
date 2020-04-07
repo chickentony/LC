@@ -19,6 +19,7 @@ class LeftMenuCest
      * @param AcceptanceTester $I
      * @param MainPage $mainPage
      * @throws \Codeception\Exception\ModuleException
+     * @throws \Exception
      */
     public function leftMenuItems(AcceptanceTester $I, MainPage $mainPage): void
     {

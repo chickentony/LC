@@ -8,7 +8,6 @@ use AcceptanceTester;
 
 class MainPage
 {
-    /** @var string Кнопка выхода из админки */
     public const LOGOUT_BUTTON = '//*[@title="Logout"]';
 
     public const LOGOTYPE_IMG = '//img[@title="My Store"]';
@@ -19,8 +18,13 @@ class MainPage
 
     public const PAGE_TITLE = '//h1';
 
+    /** @var AcceptanceTester */
     protected $tester;
 
+    /**
+     * MainPage constructor.
+     * @param AcceptanceTester $tester
+     */
     public function __construct(AcceptanceTester $tester)
     {
         $this->tester = $tester;
@@ -44,7 +48,6 @@ class MainPage
 
     /**
      * @throws \Exception
-     * Исключить клик по первому элементу в подэлементах
      */
     public function openItemsAndSubItemsAndCheckThatPagesHasTitles(): bool
     {
@@ -56,7 +59,7 @@ class MainPage
             }
             $subItems = $this->getAllMenuSubItems();
             if (!empty($subItems)) {
-                foreach ($subItems as $subItem) {
+                foreach (array_slice($subItems, 1) as $subItem) {
                     $this->tester->click($subItem);
                     if ($this->checkTitleExistOnPage() === false) {
                         return false;
