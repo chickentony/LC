@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Page\Main;
 
 use AcceptanceTester;
@@ -62,6 +64,8 @@ class MainPage
     /** @var string Счетчик товаров в корзине */
     public const SHOPPING_CART_ITEMS_COUNT_SPAN = '//div[@id="cart"]//a//span[@class="quantity"]';
 
+    public const MOST_POPULAR_PRODUCTS_DIV = '//div[@id="box-most-popular"]//a[@class="link"]';
+
     /**
      * MainPage constructor.
      * @param AcceptanceTester $tester
@@ -99,7 +103,7 @@ class MainPage
      * @param $login string
      * @param $password string
      */
-    public function login($login, $password)
+    public function login($login, $password): void
     {
         $this->tester->fillField(self::EMAIL_INPUT, $login);
         $this->tester->fillField(self::PASSWORD_INPUT, $password);
@@ -107,7 +111,7 @@ class MainPage
     }
 
     /** Выход пользователя из акаунта */
-    public function logout()
+    public function logout(): void
     {
         $this->tester->click(self::LOGOUT_LINK);
     }
@@ -116,7 +120,7 @@ class MainPage
      * Получает css свойства обычной цены
      * @throws \Codeception\Exception\ModuleException
      */
-    public function getRegularPriceCssProperties()
+    public function getRegularPriceCssProperties(): void
     {
         foreach ($this->regularPriceCssProperties as $k => $v) {
             $this->regularPriceCssProperties[$k] = $this->tester->getCssProperty(self::REGULAR_PRICE, $k);
@@ -127,7 +131,7 @@ class MainPage
      * Получает свойства скидочной цены
      * @throws \Codeception\Exception\ModuleException
      */
-    public function getCampaignPriceCssProperties()
+    public function getCampaignPriceCssProperties(): void
     {
         foreach ($this->campaignPriceCssProperties as $k => $v) {
             $this->campaignPriceCssProperties[$k] = $this->tester->getCssProperty(self::CAMPAIGN_PRICE, $k);
@@ -139,7 +143,7 @@ class MainPage
      * @throws \Exception
      * Клиает на ссылку категории
      */
-    public function clickOnCategoryLink(string $category)
+    public function clickOnCategoryLink(string $category): void
     {
         $this->tester->waitForElementVisible($category);
         $this->tester->click($category);
@@ -149,7 +153,7 @@ class MainPage
      * @throws \Exception
      * Кликает на иконку корзины с товарами
      */
-    public function clickOnShoppingCartIcon()
+    public function clickOnShoppingCartIcon(): void
     {
         $this->tester->waitForElementVisible(self::SHOPPING_CART_ICON);
         $this->tester->click(self::SHOPPING_CART_ICON);
@@ -159,7 +163,7 @@ class MainPage
      * @throws \Exception
      * Добавляет несколько разны товаров в корзину
      */
-    public function addDifferentProductsToShoppingCart()
+    public function addDifferentProductsToShoppingCart(): void
     {
         $i = 0;
         foreach ($this->categoryPage::PRODUCT_LIST as $productName => $productXpath) {
@@ -170,5 +174,11 @@ class MainPage
             $this->categoryPage->productPage->checkItemsCountInCart($i, self::SHOPPING_CART_ITEMS_COUNT_SPAN);
             $this->categoryPage->productPage->clickOnHomeIcon();
         }
+    }
+
+    public function getAllPopularProducts()
+    {
+        $result = $this->tester->grabMultiple(self::MOST_POPULAR_PRODUCTS_DIV);
+        var_dump($result);
     }
 }
