@@ -16,6 +16,6 @@ class SaleStickersCest
     {
         $I->wantTo('Check sale stickers exist');
         $I->amOnPage($mainPage::MAIN_PAGE_URL);
-        $mainPage->getAllPopularProducts();
+        $mainPage->checkSaleStickersInPopularProdducts();
     }
 }

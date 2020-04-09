@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Tests\Page\Main;
 
 use AcceptanceTester;
+use Codeception\Exception\ModuleException;
+use Exception;
 use Tests\Page\Main\Categories\CategoryPage;
 use Tests\Page\Main\Registration\RegistrationPage;
 use Tests\Page\Main\ShoppingCart\ShoppingCartPage;
@@ -118,7 +120,7 @@ class MainPage
 
     /**
      * Получает css свойства обычной цены
-     * @throws \Codeception\Exception\ModuleException
+     * @throws ModuleException
      */
     public function getRegularPriceCssProperties(): void
     {
@@ -129,7 +131,7 @@ class MainPage
 
     /**
      * Получает свойства скидочной цены
-     * @throws \Codeception\Exception\ModuleException
+     * @throws ModuleException
      */
     public function getCampaignPriceCssProperties(): void
     {
@@ -140,7 +142,7 @@ class MainPage
 
     /**
      * @param $category
-     * @throws \Exception
+     * @throws Exception
      * Клиает на ссылку категории
      */
     public function clickOnCategoryLink(string $category): void
@@ -150,7 +152,7 @@ class MainPage
     }
 
     /**
-     * @throws \Exception
+     * @throws Exception
      * Кликает на иконку корзины с товарами
      */
     public function clickOnShoppingCartIcon(): void
@@ -160,7 +162,7 @@ class MainPage
     }
 
     /**
-     * @throws \Exception
+     * @throws Exception
      * Добавляет несколько разны товаров в корзину
      */
     public function addDifferentProductsToShoppingCart(): void
@@ -176,9 +178,20 @@ class MainPage
         }
     }
 
-    public function getAllPopularProducts()
+    public function getAllPopularProducts(): array
     {
-        $result = $this->tester->grabMultiple(self::MOST_POPULAR_PRODUCTS_DIV);
-        var_dump($result);
+        return $this->tester->grabMultiple(self::MOST_POPULAR_PRODUCTS_DIV);
+    }
+
+    public function checkSaleStickersInPopularProdducts()
+    {
+        $popularProducts = $this->getAllPopularProducts();
+        $result = '';
+        foreach ($popularProducts as $productNumber => $productInfo) {
+            if (stripos($productInfo, 'SALE') !== false) {
+                $result = $productNumber;
+            }
+        }
+//        var_dump($result);
     }
 }
