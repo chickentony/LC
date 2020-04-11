@@ -49,7 +49,7 @@ class MainPage
     public const LOGIN_BUTTON = '//table//button[contains(@name, "login")]';
 
     /** @var string Первый акционный элемент */
-    public const CAMPAIGN_FIRST_ITEM = '//div[@id="box-campaigns"]//a[@class="link"]';
+    public const CAMPAIGN_FIRST_ITEM = '//div[@id="box-campaigns"]//a[@class="link"][1]';
 
     /** @var string Ссылка на страницу регистрации */
     public const REGISTRATION_LINK = '//form[@name="login_form"]//table//a';
@@ -67,6 +67,10 @@ class MainPage
     public const SHOPPING_CART_ITEMS_COUNT_SPAN = '//div[@id="cart"]//a//span[@class="quantity"]';
 
     public const MOST_POPULAR_PRODUCTS_DIV = '//div[@id="box-most-popular"]//a[@class="link"]';
+
+    public const CAMPAIGNS_PRODUCTS_DIV = '//div[@id="box-campaigns"]//a[@class="link"]';
+
+    public const LATEST_PRODUCTS_DIV = '//div[@id="box-latest-products"]//a[@class="link"]';
 
     /**
      * MainPage constructor.
@@ -178,20 +182,46 @@ class MainPage
         }
     }
 
-    public function getAllPopularProducts(): array
+    public function getProducts(string $productXPath): array
     {
-        return $this->tester->grabMultiple(self::MOST_POPULAR_PRODUCTS_DIV);
+        return $this->tester->grabMultiple($productXPath);
     }
 
-    public function checkSaleStickersInPopularProdducts()
+    private function checkSaleStickerExist(string $product): bool
     {
-        $popularProducts = $this->getAllPopularProducts();
-        $result = '';
-        foreach ($popularProducts as $productNumber => $productInfo) {
-            if (stripos($productInfo, 'SALE') !== false) {
-                $result = $productNumber;
+        return stripos($product, 'SALE') !== false;
+    }
+
+    public function checkAvailabilitySaleStickersInPopularProducts(): bool
+    {
+        $popularProducts = $this->getProducts(self::MOST_POPULAR_PRODUCTS_DIV);
+        foreach ($popularProducts as $productInfo) {
+            if ($this->checkSaleStickerExist($productInfo) !== false) {
+                return true;
             }
         }
-//        var_dump($result);
+        return false;
+    }
+
+    public function checkAvailabilitySaleStickersInCampaignsProducts(): bool
+    {
+        $campaignsProducts = $this->getProducts(self::CAMPAIGNS_PRODUCTS_DIV);
+        foreach ($campaignsProducts as $productInfo) {
+            if ($this->checkSaleStickerExist($productInfo) !== false) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public function checkAvailabilitySaleStickersInLatestProducts(): bool
+    {
+        $latestProducts = $this->getProducts(self::LATEST_PRODUCTS_DIV);
+        foreach ($latestProducts as $productInfo) {
+            if ($this->checkSaleStickerExist($productInfo) !== false) {
+                return true;
+            }
+        }
+        return false;
     }
 }

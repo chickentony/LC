@@ -10,12 +10,15 @@ use Tests\Page\Main\MainPage;
 class SaleStickersCest
 {
     /**
-     * @param AcceptanceTester AcceptanceTester.php
+     * @param AcceptanceTester $I
+     * @param MainPage $mainPage
      */
-    public function successAuthorization(AcceptanceTester $I, MainPage $mainPage): void
+    public function checkAvailabilityOfSaleStickers(AcceptanceTester $I, MainPage $mainPage): void
     {
         $I->wantTo('Check sale stickers exist');
         $I->amOnPage($mainPage::MAIN_PAGE_URL);
-        $mainPage->checkSaleStickersInPopularProdducts();
+        $I->assertTrue($mainPage->checkAvailabilitySaleStickersInPopularProducts());
+        $I->assertTrue($mainPage->checkAvailabilitySaleStickersInCampaignsProducts());
+        $I->assertTrue($mainPage->checkAvailabilitySaleStickersInLatestProducts());
     }
 }
