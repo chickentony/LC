@@ -1,50 +1,57 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Helper;
 
 // here you can define custom actions
 // all public methods declared in helper class will be available in $I
 
+use Codeception\Exception\ModuleException;
+use Codeception\Module;
+use Exception;
 use Facebook\WebDriver\WebDriver;
 use PHPUnit\Framework\Assert;
+use PHPUnit_Framework_Assert;
+use WebDriverBy;
 
-class Acceptance extends \Codeception\Module
+class Acceptance extends Module
 {
     /**
      * @param $element
-     * @throws \Codeception\Exception\ModuleException
-     * @throws \Exception
+     * @throws ModuleException
+     * @throws Exception
      */
-    public function waitTillPageLoad($element)
+    public function waitTillPageLoad($element): void
     {
-        /** @var \Codeception\Module\WebDriver $webDriver */
+        /** @var Module\WebDriver $webDriver */
         $webDriver = $this->getModule('WebDriver');
         $webDriver->waitForElementVisible($element);
     }
 
     /**
      * @param $elements
-     * @throws \Codeception\Exception\ModuleException
+     * @throws ModuleException
      */
-    public function checkSortOnPage($elements)
+    public function checkSortOnPage($elements): void
     {
-        /** @var \Codeception\Module\WebDriver $webDriver */
+        /** @var Module\WebDriver $webDriver */
         $webDriver = $this->getModule('WebDriver');
         $result = $webDriver->grabMultiple($elements);
         $sortedResult = array_values($result);
         asort($sortedResult);
-        \PHPUnit_Framework_Assert::assertTrue($result === $sortedResult);
+        PHPUnit_Framework_Assert::assertSame($result, $sortedResult);
     }
 
     /**
      * @param $valuesList
-     * @throws \Codeception\Exception\ModuleException
+     * @throws ModuleException
      */
-    public function checkSort($valuesList)
+    public function checkSort($valuesList): void
     {
         $sortedValuesList = $valuesList;
         asort($sortedValuesList);
-        \PHPUnit_Framework_Assert::assertTrue($valuesList === $sortedValuesList);
+        PHPUnit_Framework_Assert::assertSame($valuesList, $sortedValuesList);
     }
 
     /**
@@ -52,27 +59,25 @@ class Acceptance extends \Codeception\Module
      * @param string $locator
      * @param string $cssProperty
      * @return mixed
-     * @throws \Codeception\Exception\ModuleException
+     * @throws ModuleException
      */
     public function getCssProperty(string $locator, string $cssProperty)
     {
-        /** @var \Codeception\Module\WebDriver $webDriver */
+        /** @var Module\WebDriver $webDriver */
         $webDriver = $this->getModule('WebDriver');
-        $result = $webDriver->
-        executeInSelenium(function (\Facebook\WebDriver\WebDriver $driver) use ($locator, $cssProperty) {
-            return $driver->findElement(\WebDriverBy::xpath($locator))->getCSSValue($cssProperty);
+        return $webDriver->
+        executeInSelenium(static function (WebDriver $driver) use ($locator, $cssProperty) {
+            return $driver->findElement(WebDriverBy::xpath($locator))->getCSSValue($cssProperty);
         });
-
-        return $result;
     }
 
     /**
      * @param $popupMessage
-     * @throws \Codeception\Exception\ModuleException
+     * @throws ModuleException
      */
-    public function closePopup(string $popupMessage)
+    public function closePopup(string $popupMessage): void
     {
-        /** @var \Codeception\Module\WebDriver $webDriver */
+        /** @var Module\WebDriver $webDriver */
         $webDriver = $this->getModule('WebDriver');
         $webDriver->seeInPopup($popupMessage);
         $webDriver->acceptPopup();
@@ -80,23 +85,23 @@ class Acceptance extends \Codeception\Module
 
     /**
      * @return array
-     * @throws \Codeception\Exception\ModuleException
+     * @throws ModuleException
      */
     public function getWindowHandles(): array
     {
-        /** @var \Codeception\Module\WebDriver $webDriver */
+        /** @var Module\WebDriver $webDriver */
         $webDriver = $this->getModule('WebDriver');
         return $webDriver->webDriver->getWindowHandles();
     }
 
     /**
      * @param string $id
-     * @throws \Codeception\Exception\ModuleException
+     * @throws ModuleException
      * Закрывает вкладку браузера по id
      */
-    public function closeWindowById(string $id)
+    public function closeWindowById(string $id): void
     {
-        /** @var \Codeception\Module\WebDriver $webDriver */
+        /** @var Module\WebDriver $webDriver */
         $webDriver = $this->getModule('WebDriver');
         $webDriver->switchToWindow($id);
         $webDriver->closeTab();
@@ -105,28 +110,32 @@ class Acceptance extends \Codeception\Module
     /**
      * @param string $locator
      * @return int
-     * @throws \Codeception\Exception\ModuleException
+     * @throws ModuleException
      * Возвращает кол-во элементов на странице
      */
-    public function getNumberOfElementsOnPage(string $locator)
+    public function getNumberOfElementsOnPage(string $locator): int
     {
-        /** @var \Codeception\Module\WebDriver $webDriver */
+        /** @var Module\WebDriver $webDriver */
         $webDriver = $this->getModule('WebDriver');
-
         return count($webDriver->_findElements($locator));
     }
 
     /**
      * @return array
-     * @throws \Codeception\Exception\ModuleException
+     * @throws ModuleException
      * Получает сообщения из лога бразуера
      */
-    public function getBrowserLog()
+    public function getBrowserLog(): array
     {
-        /** @var \Codeception\Module\WebDriver $webDriver */
+        /** @var Module\WebDriver $webDriver */
         $webDriver = $this->getModule('WebDriver');
-
         return $webDriver->webDriver->manage()->getLog('browser');
     }
 
+    public function changeBrowser(): void
+    {
+        /** @var Module\WebDriver $webDriver */
+        $webDriver = $this->getModule('WebDriver');
+        $webDriver->_restart(['browser' => 'internet explorer']);
+    }
 }
