@@ -1,8 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Page\Main;
 
 use AcceptanceTester;
+use Codeception\Exception\ModuleException;
+use Exception;
 use Tests\Page\Main\Categories\CategoryPage;
 use Tests\Page\Main\Registration\RegistrationPage;
 use Tests\Page\Main\ShoppingCart\ShoppingCartPage;
@@ -45,7 +49,7 @@ class MainPage
     public const LOGIN_BUTTON = '//table//button[contains(@name, "login")]';
 
     /** @var string Первый акционный элемент */
-    public const CAMPAIGN_FIRST_ITEM = '//div[@id="box-campaigns"]//a[@class="link"]';
+    public const CAMPAIGN_FIRST_ITEM = '//div[@id="box-campaigns"]//a[@class="link"][1]';
 
     /** @var string Ссылка на страницу регистрации */
     public const REGISTRATION_LINK = '//form[@name="login_form"]//table//a';
@@ -61,6 +65,12 @@ class MainPage
 
     /** @var string Счетчик товаров в корзине */
     public const SHOPPING_CART_ITEMS_COUNT_SPAN = '//div[@id="cart"]//a//span[@class="quantity"]';
+
+    public const MOST_POPULAR_PRODUCTS_DIV = '//div[@id="box-most-popular"]//a[@class="link"]';
+
+    public const CAMPAIGNS_PRODUCTS_DIV = '//div[@id="box-campaigns"]//a[@class="link"]';
+
+    public const LATEST_PRODUCTS_DIV = '//div[@id="box-latest-products"]//a[@class="link"]';
 
     /**
      * MainPage constructor.
@@ -99,7 +109,7 @@ class MainPage
      * @param $login string
      * @param $password string
      */
-    public function login($login, $password)
+    public function login($login, $password): void
     {
         $this->tester->fillField(self::EMAIL_INPUT, $login);
         $this->tester->fillField(self::PASSWORD_INPUT, $password);
@@ -107,16 +117,16 @@ class MainPage
     }
 
     /** Выход пользователя из акаунта */
-    public function logout()
+    public function logout(): void
     {
         $this->tester->click(self::LOGOUT_LINK);
     }
 
     /**
      * Получает css свойства обычной цены
-     * @throws \Codeception\Exception\ModuleException
+     * @throws ModuleException
      */
-    public function getRegularPriceCssProperties()
+    public function getRegularPriceCssProperties(): void
     {
         foreach ($this->regularPriceCssProperties as $k => $v) {
             $this->regularPriceCssProperties[$k] = $this->tester->getCssProperty(self::REGULAR_PRICE, $k);
@@ -125,9 +135,9 @@ class MainPage
 
     /**
      * Получает свойства скидочной цены
-     * @throws \Codeception\Exception\ModuleException
+     * @throws ModuleException
      */
-    public function getCampaignPriceCssProperties()
+    public function getCampaignPriceCssProperties(): void
     {
         foreach ($this->campaignPriceCssProperties as $k => $v) {
             $this->campaignPriceCssProperties[$k] = $this->tester->getCssProperty(self::CAMPAIGN_PRICE, $k);
@@ -136,30 +146,30 @@ class MainPage
 
     /**
      * @param $category
-     * @throws \Exception
+     * @throws Exception
      * Клиает на ссылку категории
      */
-    public function clickOnCategoryLink(string $category)
+    public function clickOnCategoryLink(string $category): void
     {
         $this->tester->waitForElementVisible($category);
         $this->tester->click($category);
     }
 
     /**
-     * @throws \Exception
+     * @throws Exception
      * Кликает на иконку корзины с товарами
      */
-    public function clickOnShoppingCartIcon()
+    public function clickOnShoppingCartIcon(): void
     {
         $this->tester->waitForElementVisible(self::SHOPPING_CART_ICON);
         $this->tester->click(self::SHOPPING_CART_ICON);
     }
 
     /**
-     * @throws \Exception
+     * @throws Exception
      * Добавляет несколько разны товаров в корзину
      */
-    public function addDifferentProductsToShoppingCart()
+    public function addDifferentProductsToShoppingCart(): void
     {
         $i = 0;
         foreach ($this->categoryPage::PRODUCT_LIST as $productName => $productXpath) {
@@ -170,5 +180,48 @@ class MainPage
             $this->categoryPage->productPage->checkItemsCountInCart($i, self::SHOPPING_CART_ITEMS_COUNT_SPAN);
             $this->categoryPage->productPage->clickOnHomeIcon();
         }
+    }
+
+    public function getProducts(string $productXPath): array
+    {
+        return $this->tester->grabMultiple($productXPath);
+    }
+
+    private function checkSaleStickerExist(string $product): bool
+    {
+        return stripos($product, 'SALE') !== false;
+    }
+
+    public function checkAvailabilitySaleStickersInPopularProducts(): bool
+    {
+        $popularProducts = $this->getProducts(self::MOST_POPULAR_PRODUCTS_DIV);
+        foreach ($popularProducts as $productInfo) {
+            if ($this->checkSaleStickerExist($productInfo) !== false) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public function checkAvailabilitySaleStickersInCampaignsProducts(): bool
+    {
+        $campaignsProducts = $this->getProducts(self::CAMPAIGNS_PRODUCTS_DIV);
+        foreach ($campaignsProducts as $productInfo) {
+            if ($this->checkSaleStickerExist($productInfo) !== false) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public function checkAvailabilitySaleStickersInLatestProducts(): bool
+    {
+        $latestProducts = $this->getProducts(self::LATEST_PRODUCTS_DIV);
+        foreach ($latestProducts as $productInfo) {
+            if ($this->checkSaleStickerExist($productInfo) !== false) {
+                return true;
+            }
+        }
+        return false;
     }
 }
