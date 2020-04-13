@@ -4,14 +4,10 @@ declare(strict_types=1);
 
 namespace Helper;
 
-// here you can define custom actions
-// all public methods declared in helper class will be available in $I
-
 use Codeception\Exception\ModuleException;
 use Codeception\Module;
 use Exception;
 use Facebook\WebDriver\WebDriver;
-use PHPUnit\Framework\Assert;
 use PHPUnit_Framework_Assert;
 use WebDriverBy;
 
@@ -130,12 +126,5 @@ class Acceptance extends Module
         /** @var Module\WebDriver $webDriver */
         $webDriver = $this->getModule('WebDriver');
         return $webDriver->webDriver->manage()->getLog('browser');
-    }
-
-    public function changeBrowser(): void
-    {
-        /** @var Module\WebDriver $webDriver */
-        $webDriver = $this->getModule('WebDriver');
-        $webDriver->_restart(['browser' => 'internet explorer']);
     }
 }

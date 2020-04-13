@@ -12,11 +12,6 @@ use Tests\Page\Main\MainPage;
 
 class AuthorizationCest
 {
-//    public function _before(AcceptanceTester $I)
-//    {
-//        $I->changeBrowser();
-//    }
-
     /**
      * @param AcceptanceTester $I
      * @param MainPage $mainPage
