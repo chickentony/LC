@@ -7,7 +7,12 @@
 actor: AcceptanceTester
 modules:
     enabled:
-        - WebDriver:
+        - WebDriver
+        - \Helper\Acceptance
+        - Asserts
+        - \Helper\DbHelper
+    config:
+        WebDriver:
             url: 'http://localhost/LiteCart'
             browser: chrome
             restart: true
@@ -15,11 +20,20 @@ modules:
             window_size: 'maximize'
 #            capabilities:
 #               "goog:chromeOptions":
-        - \Helper\Acceptance
-        - Asserts
-        - \Helper\DbHelper
-        - Db:
+        Db:
             dsn: "mysql:host=%DB_HOST%;port=%DB_PORT%;dbname=%DB_NAME%;charset=utf8"
             user: "%DB_USER%"
             password: ''
-    step_decorators: ~        
+    step_decorators: ~
+env:
+    ie:
+        modules:
+            config:
+                WebDriver:
+                    browser: internet explorer
+
+    firefox:
+        modules:
+            config:
+                WebDriver:
+                    browser: firefox

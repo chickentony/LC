@@ -6,6 +6,8 @@ namespace Tests\acceptance\Authorization;
 
 use AcceptanceTester;
 use Codeception\Example;
+use Codeception\Exception\ModuleException;
+use Exception;
 use Tests\Page\Main\MainPage;
 
 class AuthorizationCest
@@ -13,7 +15,7 @@ class AuthorizationCest
     /**
      * @param AcceptanceTester $I
      * @param MainPage $mainPage
-     * @throws \Exception
+     * @throws Exception
      */
     public function successAuthorization(AcceptanceTester $I, MainPage $mainPage): void
     {
@@ -31,7 +33,7 @@ class AuthorizationCest
      * @param AcceptanceTester $I
      * @param MainPage $mainPage
      * @param Example $example
-     * @throws \Codeception\Exception\ModuleException
+     * @throws ModuleException
      * @dataProvider wrongLoginParamsDataProvider
      */
     public function authorizationWithWrongParams(AcceptanceTester $I, MainPage $mainPage, Example $example): void
@@ -67,7 +69,7 @@ class AuthorizationCest
     /**
      * @param AcceptanceTester $I
      * @param MainPage $mainPage
-     * @throws \Exception
+     * @throws Exception
      */
     public function authorizationWithoutPassword(AcceptanceTester $I, MainPage $mainPage): void
     {
