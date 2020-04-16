@@ -10,4 +10,4 @@ params:
 extensions:
     enabled:
         - Codeception\Extension\RunFailed
-    commands: [Tests\_support\Commands\MyCustomCommand]
+    commands: [Tests\_support\Commands\GenerateTemplate]

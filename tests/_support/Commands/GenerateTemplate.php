@@ -1,14 +1,12 @@
 <?php
-/**
- * An example for a custom command to add to the framework.
- *
- * @author    Tobias Matthaiou <tm@solutionDrive.de>
- * @date      27.01.16
- */
+
+declare(strict_types=1);
+
 namespace Tests\_support\Commands;
 
 use Codeception\Command\Shared\Config;
 use Codeception\Command\Shared\FileSystem;
+use Exception;
 use \Symfony\Component\Console\Command\Command;
 use \Codeception\CustomCommandInterface;
 use \Symfony\Component\Console\Input\InputOption;
@@ -16,7 +14,7 @@ use \Symfony\Component\Console\Input\InputInterface;
 use \Symfony\Component\Console\Output\OutputInterface;
 use Tests\_support\Templates\AcceptanceTestTemplate;
 
-class MyCustomCommand extends Command implements CustomCommandInterface
+class GenerateTemplate extends Command implements CustomCommandInterface
 {
 
     use FileSystem;
@@ -24,12 +22,11 @@ class MyCustomCommand extends Command implements CustomCommandInterface
 
     /**
      * returns the name of the command
-     *
      * @return string
      */
-    public static function getCommandName()
+    public static function getCommandName(): string
     {
-        return "myProject:myCommand";
+        return 'Templates:generateTemplate';
     }
 
     /**
@@ -47,12 +44,11 @@ class MyCustomCommand extends Command implements CustomCommandInterface
 
     /**
      * Returns the description for the command.
-     *
-     * @return string The description for the command
+     * @return string
      */
-    public function getDescription()
+    public function getDescription(): string
     {
-        return "This is my command to say hello";
+        return 'Generate template for test';
     }
 
     /**
@@ -84,7 +80,11 @@ class MyCustomCommand extends Command implements CustomCommandInterface
 //        echo "Hello " . get_current_user();
 //        echo $messageEnd . PHP_EOL;
 //        return 0;
-        AcceptanceTestTemplate::createTest();
+//        AcceptanceTestTemplate::createTest();
+        if (file_exists('AcceptanceTestExampleCest.php')) {
+            throw new Exception('File already created');
+        }
+        $this->createFile('AcceptanceTestExampleCest.php', AcceptanceTestTemplate::$test);
         echo 'ok';
         return 0;
 
