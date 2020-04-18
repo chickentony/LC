@@ -6,8 +6,15 @@ namespace Tests\_support\Templates;
 
 class AcceptanceTestTemplate
 {
-    public static $test = <<<EOF
+    public const ACCEPTANCE_EXAMPLE = <<<EOF
     <?php
+    
+    declare(strict_types=1);
+    
+    namespace Tests\acceptance;
+    
+    use AcceptanceTester;
+    
     class AcceptanceTestExampleCest 
     {    
         public function _before(AcceptanceTester \$I)
@@ -15,24 +22,15 @@ class AcceptanceTestTemplate
             \$I->amOnPage('/');
         }
     
-        public function loginSuccessfully(AcceptanceTester \$I)
+        public function firstTest(AcceptanceTester \$I)
         {
-            // write a positive login test 
+            // write a positive test 
         }
         
-        public function loginWithInvalidPassword(AcceptanceTester \$I)
+        public function secondTest(AcceptanceTester \$I)
         {
-            // write a negative login test
+            // write a negative test
         }       
     }
     EOF;
-
-//    public static function createTest()
-//    {
-//        if (file_exists('AcceptanceTestExampleCest.php')) {
-//            throw new \Exception('File already created');
-//        }
-//        file_put_contents('tests/acceptance/AcceptanceTestExampleCest.php', self::$test);
-//    }
-
 }

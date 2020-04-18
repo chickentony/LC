@@ -35,8 +35,7 @@ class GenerateTemplate extends Command implements CustomCommandInterface
     protected function configure()
     {
         $this->setDefinition(array(
-            new InputOption('friendly', 'f', InputOption::VALUE_NONE, 'The Message will be friendly'),
-
+            new InputOption('acceptance', 'a', InputOption::VALUE_NONE, 'Generate acceptance test example'),
         ));
 
         parent::configure();
@@ -52,43 +51,25 @@ class GenerateTemplate extends Command implements CustomCommandInterface
     }
 
     /**
-     * Executes the current command.
-     *
-     * This method is not abstract because you can use this class
-     * as a concrete class. In this case, instead of defining the
-     * execute() method, you set the code to execute by passing
-     * a Closure to the setCode() method.
-     *
-     * @param InputInterface $input  An InputInterface instance
-     * @param OutputInterface $output An OutputInterface instance
-     *
-     * @return null|int null or 0 if everything went fine, or an error code
-     *
-     * @throws LogicException When this abstract method is not implemented
-     *
-     * @see setCode()
+     * @param InputInterface $input
+     * @param OutputInterface $output
+     * @return int|null
+     * @throws Exception
      */
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): ?int
     {
-//        $messageEnd = "!" . PHP_EOL;
-//
-//        if ($input->getOption('friendly')) {
-//            $messageEnd = "," . PHP_EOL;
-//            $messageEnd .= "how are you?" . PHP_EOL;
-//        }
-//
-//        echo "Hello " . get_current_user();
-//        echo $messageEnd . PHP_EOL;
-//        return 0;
-//        AcceptanceTestTemplate::createTest();
-        if (file_exists('AcceptanceTestExampleCest.php')) {
-            throw new Exception('File already created');
+        if ($input->getOption('acceptance')) {
+            if (file_exists('AcceptanceTestExampleCest.php')) {
+                $output->write('You already create file please check it in acceptance directory', false, 1);
+                return 0;
+            }
+            $this->createFile(
+                'tests\AcceptanceTestExampleCest.php', AcceptanceTestTemplate::ACCEPTANCE_EXAMPLE
+            );
+            $output->write('Example test created successfully', false, 1);
+            return 1;
         }
-        $this->createFile('AcceptanceTestExampleCest.php', AcceptanceTestTemplate::$test);
-        echo 'ok';
-        return 0;
-
-//        var_dump(file_put_contents('LoginCest.php', $this->test));
-//        return 1;
+        $output->write('Please select template by using --help command');
+        return 1;
     }
 }
