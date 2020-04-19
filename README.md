@@ -4,7 +4,7 @@
 ### Как развернуть проект локально:
 
 Для работы с проектом понадобиться:
-- установить локальный сервер с php интерпретатор (https://www.apachefriends.org/ru/index.html) и запустить сервер
+- установить локальный сервер с php интерпретатором (https://www.apachefriends.org/ru/index.html) и запустить сервер
 - склонировать проект в папку **htdocs** на локальном сервере
 - установить composer (https://getcomposer.org/doc/00-intro.md)
 - наполнить базу данными (?нужно изучить вопрос?)
@@ -18,7 +18,7 @@ composer install
 Установить:
 - java на локальную машину
 - скачать selenium-server (https://www.selenium.dev/downloads/)
-- скачать chromedriver (или любой другой драйвер для вашего брауезра, в проекте используется chrome по дефолту)
+- скачать chromedriver (или любой другой драйвер для вашего брауезра, в проекте используется chrome по умолчанию)
 - запуск всех тестов:
 ```
 vendor\bin\codecep run tests\acceptance
