@@ -11,6 +11,15 @@
   
 // Web System
   define('WS_DIR_HTTP_HOME', str_replace(FS_DIR_HTTP_ROOT, '', str_replace("\\", '/', realpath(dirname(__FILE__) . '/' . '..') . '/')));
+// Vendor
+  define('DIR_VENDOR', __DIR__ . '/../vendor/');
+
+  if (file_exists(DIR_VENDOR . 'autoload.php')) {
+      require_once(DIR_VENDOR . 'autoload.php');
+  } else {
+      echo 'Run composer install command to create vendor directory';
+  }
+  require_once(__DIR__ . '/env.php');
   
   define('WS_DIR_ADMIN',       WS_DIR_HTTP_HOME . 'admin/');
   define('WS_DIR_AJAX',        WS_DIR_HTTP_HOME . 'ajax/');
@@ -38,10 +47,10 @@
 
 // Database
   define('DB_TYPE', 'mysql');
-  define('DB_SERVER', '127.0.0.1');
-  define('DB_USERNAME', 'root');
-  define('DB_PASSWORD', '');
-  define('DB_DATABASE', 'litecart2');
+  define('DB_SERVER', getenv('DB_HOST'));
+  define('DB_USERNAME', getenv('DB_USER'));
+  define('DB_PASSWORD', getenv('DB_PASSWORD'));
+  define('DB_DATABASE', getenv('DB_NAME'));
   define('DB_TABLE_PREFIX', 'lc_');
   define('DB_CONNECTION_CHARSET', (strtoupper(substr(PHP_OS, 0, 3)) == 'WIN') ? 'latin1' : 'utf8'); // utf8 or latin1
   define('DB_PERSISTENT_CONNECTIONS', 'false');
@@ -119,9 +128,6 @@
   
 // Password Encryption Salt
   define('PASSWORD_SALT', 'rJONvAhIq4qUfjLDeCTR7libydHp09surO6GCljAE5eziDPrQkGTbjxj4jAq0wTm1wmC9YQoWwSFNscAggN4pId69SE71wdX5U8p173YYWcKvZSnhtJedidK4lH8jVoh');
-
-  // Vendor
-  define('DIR_VENDOR', __DIR__ . '/../vendor/');
 
   // Custom boolean env support
   if (!function_exists('booleanEnvVariable')) {

@@ -11,6 +11,7 @@ modules:
         - \Helper\Acceptance
         - Asserts
         - \Helper\DbHelper
+        - Db
     config:
         WebDriver:
             url: 'http://localhost/LiteCart'
